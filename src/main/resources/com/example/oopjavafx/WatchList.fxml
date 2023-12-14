@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1050.0" prefWidth="1910.0" styleClass="body" stylesheets="@WatchList.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.WatchListController">
+   <children>
+      <Label layoutX="194.0" layoutY="71.0" styleClass="labels" stylesheets="@WatchList.css" text="Furga" textFill="WHITE">
+         <font>
+            <Font name="Fredoka Bold" size="50.0" />
+         </font>
+      </Label>
+      <TextField layoutX="442.0" layoutY="74.0" prefHeight="59.0" prefWidth="631.0" styleClass="search" stylesheets="@WatchList.css">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </TextField>
+      <Pane id="nav" layoutX="1645.0" layoutY="88.0" prefHeight="34.0" prefWidth="68.0" stylesheets="@WatchList.css">
+         <children>
+            <Line endX="-50.0" endY="7.62939453125E-6" fill="WHITE" layoutX="109.2928466796875" layoutY="1.4644699096679688" scaleY="5.0" startX="-100.0" stroke="WHITE" />
+            <Line endX="-50.0" endY="7.62939453125E-6" fill="WHITE" layoutX="109.2928466796875" layoutY="14.464469909667969" scaleY="5.0" startX="-100.0" stroke="WHITE" />
+            <Line endX="-50.0" endY="7.62939453125E-6" fill="WHITE" layoutX="109.2928466796875" layoutY="28.17157745361328" scaleY="4.0" startX="-100.0" stroke="WHITE" />
+         </children>
+      </Pane>
+      <Line endX="-50.0" endY="7.62939453125E-6" fill="WHITE" layoutX="1757.0" layoutY="304.0" scaleY="1.5" startX="-625.0" startY="2.5928020477294922E-5" stroke="WHITE" />
+      <Line endX="9.2000732421875" endY="-3.0517578125E-5" fill="WHITE" layoutX="790.0" layoutY="304.0" startX="-586.5999755859375" startY="-2.288818359375E-5" stroke="WHITE" />
+      <Label layoutX="844.0" layoutY="273.0" styleClass="labels" stylesheets="@WatchList.css" text="Watch list" textFill="WHITE">
+         <font>
+            <Font name="Fredoka Bold" size="50.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="207.0" layoutY="392.0" prefHeight="288.0" prefWidth="1502.0" styleClass="movie-container" stylesheets="@WatchList.css" />
+      <AnchorPane layoutX="210.0" layoutY="744.0" prefHeight="277.0" prefWidth="1502.0" styleClass="movie-container" stylesheets="@WatchList.css" />
+      <JFXButton id="subscription" layoutX="1221.0" layoutY="65.0" prefHeight="70.0" prefWidth="316.0" stylesheets="@WatchList.css" text="subscription" />
+   </children>
+</AnchorPane>
