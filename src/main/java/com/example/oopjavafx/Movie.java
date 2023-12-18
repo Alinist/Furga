@@ -40,7 +40,7 @@ public class Movie {
 
     public int user_Rating; // user rating for that movie
 
-    public Image poster = new Image("");
+//    public Image poster = new Image("");
 
     public Movie() {
         user_Rating = 0;

@@ -10,12 +10,13 @@ import javafx.stage.Stage;
 import java.io.*;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
-        stage.setTitle("WATCH IT");
+        stage.setTitle("Furga");
         Image logo = new Image("Watchit_Logo.png");
         stage.getIcons().add(logo);
         stage.setScene(scene);
@@ -24,6 +25,7 @@ public class Main extends Application {
         scene.getStylesheets().add(getClass().getResource("Register.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("WatchList.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("MovieScene.css").toExternalForm());
     }
 
     public static void main(String[] args) {

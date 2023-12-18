@@ -36,27 +36,57 @@ public class HomePageController implements Initializable {
     private Parent root;
 
     @FXML
+    private Button ForYouButton;
+
+    @FXML
     private ImageView ImageView1;
+
     @FXML
     private ImageView ImageView2;
+
     @FXML
     private ImageView ImageView3;
+
     @FXML
-    private Button ForYouButton;
+    private ImageView ImageView4;
+
     @FXML
-    private Button TrendingButton;
+    private Button Later;
+
+    @FXML
+    private Button Logout;
+
     @FXML
     private Button PopularButton;
+
     @FXML
-    private AnchorPane pane1,pane2;
+    private Button TrendingButton;
+
     @FXML
     private ImageView menu;
+
+    @FXML
+    private Button myButton1;
+
+    @FXML
+    private Button myButton2;
+
+    @FXML
+    private Button myButton3;
+
+    @FXML
+    private Button myButton4;
+
+    @FXML
+    private AnchorPane pane1;
+
+    @FXML
+    private AnchorPane pane2;
 
     public void ChangeScene(ActionEvent event) {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene1 = new Scene(root);
         stage.setScene(scene1);
-        stage.setResizable(false);
         stage.show();
     }
 
@@ -65,12 +95,12 @@ public class HomePageController implements Initializable {
 
         pane1.setVisible(false);
 
-        FadeTransition fadeTransition=new FadeTransition(Duration.seconds(0.5),pane1);
+        FadeTransition fadeTransition=new FadeTransition(Duration.seconds(0.25),pane1);
         fadeTransition.setFromValue(1);
         fadeTransition.setToValue(0);
         fadeTransition.play();
 
-        TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(0.5),pane2);
+        TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(0.01),pane2);
         translateTransition.setByX(+600);
         translateTransition.play();
 
@@ -80,12 +110,12 @@ public class HomePageController implements Initializable {
             if(!menuOpened) {
                 menuOpened = true;
                 pane1.setVisible(true);
-                FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), pane1);
+                FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.25), pane1);
                 fadeTransition1.setFromValue(0);
                 fadeTransition1.setToValue(0.15);
                 fadeTransition1.play();
 
-                TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), pane2);
+                TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.25), pane2);
                 translateTransition1.setByX(-600);
                 translateTransition1.play();
             }
@@ -95,7 +125,7 @@ public class HomePageController implements Initializable {
             menuOpened = false;
             if(!BlockingPaneExists) {
                 BlockingPaneExists = true;
-                FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.5), pane1);
+                FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(0.25), pane1);
                 fadeTransition1.setFromValue(0.15);
                 fadeTransition1.setToValue(0);
                 fadeTransition1.play();
@@ -103,7 +133,7 @@ public class HomePageController implements Initializable {
                 fadeTransition1.setOnFinished(event1 -> {
                     pane1.setVisible(false);
                 });
-                TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.5), pane2);
+                TranslateTransition translateTransition1 = new TranslateTransition(Duration.seconds(0.25), pane2);
                 translateTransition1.setByX(+600);
                 translateTransition1.play();
             }
@@ -157,11 +187,24 @@ public class HomePageController implements Initializable {
     public void Logout(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         ChangeScene(event);
+        stage.setResizable(false);
+        stage.setWidth(1045);
+        stage.setHeight(645);
+        stage.setY(180);
+        stage.setX(437.5);
     }
 
     public void WatchedList(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("WatchList.fxml"));
         ChangeScene(event);
+        stage.setResizable(true);
+    }
+
+    public void Later(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Later.fxml"));
+        ChangeScene(event);
+        stage.setResizable(true);
+        stage.setResizable(true);
     }
 
 }

@@ -279,12 +279,6 @@ public class User {
             MoviesStatues.put(movie,true);
             Later.remove(movie);
             Watched.add(movie);
-//            for (int i = 0; i < Watched.size(); i++) {
-//                if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                    Watched.get(i).setIs_Watched(true);
-//                    break;
-//                }
-//            }
         }
     }
 
@@ -305,12 +299,6 @@ public class User {
             movie.watchcount--;
         }
         Watched.remove(movie);
-//        for (int i = 0; i < Watched.size(); i++) {
-//            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                Watched.get(i).setIs_Watched(false);
-//                break;
-//            }
-//        }
     }
 
 
@@ -328,12 +316,6 @@ public class User {
             MoviesStatues.put(movie,false);
             Watched.remove(movie);
             Later.add(movie);
-//            for (int i = 0; i < Later.size(); i++) {
-//                if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                    Later.get(i).setIs_Watched(false);
-//                    break;
-//                }
-//            }
         }
     }
 
@@ -350,12 +332,6 @@ public class User {
 
     public void removeMovieFromLater(Movie movie) {
         Later.remove(movie);
-//        for (int i = 0; i < Later.size(); i++) {  maslan 7at el film bil 8alat
-//            if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-//                Later.get(i).setIs_Watched(false);
-//                break;
-//            }
-//        }
     }
 
     /********************** END OF needed to be tested *************************/

@@ -53,6 +53,8 @@ public class LoginController implements Initializable {
         ChangeScene(event);
         errorText.setTextFill(Color.RED);
         stage.setResizable(false);
+        stage.setWidth(1076);
+        stage.setHeight(818);
     }
 
     public void Login(ActionEvent event) throws Exception{
@@ -73,6 +75,10 @@ public class LoginController implements Initializable {
                 root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
                 ChangeScene(event);
                 stage.setResizable(true);
+                stage.setWidth(1920);
+                stage.setHeight(1080);
+                stage.setY(0);
+                stage.setX(0);
 //                Button newButton = new Button();
 //                root.
             }

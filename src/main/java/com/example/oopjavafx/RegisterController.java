@@ -56,6 +56,8 @@ public class RegisterController implements Initializable {
         stage.setScene(scene1);
         stage.setResizable(false);
         stage.show();
+        stage.setWidth(1045);
+        stage.setHeight(645);
     }
 
     private Scene scene1;
