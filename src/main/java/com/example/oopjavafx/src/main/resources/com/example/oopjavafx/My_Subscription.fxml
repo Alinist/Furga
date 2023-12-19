@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="home" opacity="0.86" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField focusTraversable="false" layoutX="347.0" layoutY="76.0" prefHeight="68.0" prefWidth="835.0" promptText="Search....." styleClass="Search" stylesheets="@Style.css">
+         <font>
+            <Font name="Fredoka Bold" size="36.0" />
+         </font>
+      </TextField>
+      <Label id="homeButton" focusTraversable="false" layoutX="103.0" layoutY="66.0" prefHeight="86.0" prefWidth="144.0" stylesheets="@Style.css" text="Furga" textFill="#4dde90">
+         <font>
+            <Font name="Fredoka Bold" size="48.0" />
+         </font>
+      </Label>
+      <JFXButton focusTraversable="false" layoutX="1344.0" layoutY="72.0" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Subscription" textFill="WHITE">
+         <font>
+            <Font name="Fredoka Bold" size="36.0" />
+         </font>
+      </JFXButton>
+      <ImageView fx:id="menu" fitHeight="104.0" fitWidth="104.0" layoutX="1732.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/menuicon.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="299.0" layoutY="195.0" prefHeight="819.0" prefWidth="1385.0" styleClass="Background" stylesheets="@Style.css">
+         <children>
+            <Label id="My susbscription" alignment="CENTER" focusTraversable="false" layoutX="-2.0" layoutY="14.0" prefHeight="118.0" prefWidth="1391.0" style="-fx-text-fill: #ffffff;" text="My subscription" textFill="WHITE">
+               <font>
+                  <Font name="Fredoka Bold" size="72.0" />
+               </font>
+            </Label>
+            <Group id="first name" layoutX="41.0" layoutY="163.0">
+               <children>
+                  <Label id="User fname" focusTraversable="false" layoutX="354.0" prefHeight="86.0" prefWidth="929.0" text="first name of the user" textFill="WHITE">
+                     <font>
+                        <Font name="Fredoka Bold" size="55.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="86.0" prefWidth="349.0" text="First Name:" textFill="#4dde90">
+                     <font>
+                        <Font name="Fredoka Bold" size="55.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group id="last name" layoutX="41.0" layoutY="254.0">
+               <children>
+                  <Label id="User Lname" focusTraversable="false" layoutX="351.0" prefHeight="86.0" prefWidth="929.0" text="Last name of the user" textFill="WHITE">
+                     <font>
+                        <Font name="Fredoka Bold" size="55.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="86.0" prefWidth="349.0" text="Last Name:" textFill="#4dde90">
+                     <font>
+                        <Font name="Fredoka Bold" size="55.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group id="subscription" layoutX="41.0" layoutY="350.0">
+               <children>
+                  <Label id="his subscription" alignment="CENTER" focusTraversable="false" layoutX="634.0" prefHeight="86.0" prefWidth="429.0" text="his subscription" textFill="WHITE">
+                     <font>
+                        <Font name="Fredoka Bold" size="55.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="86.0" prefWidth="657.0" text="Currently subscribed to:" textFill="#4dde90">
+                     <font>
+                        <Font name="Fredoka Bold" size="55.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group id="Bottom text" layoutX="82.0" layoutY="500.0">
+               <children>
+                  <Label id="You have watched" alignment="CENTER" focusTraversable="false" layoutX="-5.0" layoutY="2.0" prefHeight="86.0" prefWidth="513.0" text="You have watched" textFill="WHITE">
+                     <font>
+                        <Font name="Fredoka Bold" size="60.0" />
+                     </font>
+                  </Label>
+                  <Label id="number of wathed" alignment="CENTER" layoutX="498.0" prefHeight="86.0" prefWidth="103.0" text="No" textFill="#4dde90">
+                     <font>
+                        <Font name="Fredoka Bold" size="64.0" />
+                     </font>
+                  </Label>
+                  <Label id="movies out of" alignment="CENTER" focusTraversable="false" layoutX="592.0" layoutY="2.0" prefHeight="86.0" prefWidth="375.0" text="movies out of" textFill="WHITE">
+                     <font>
+                        <Font name="Fredoka Bold" size="60.0" />
+                     </font>
+                  </Label>
+                  <Label id="max number of watched" alignment="CENTER" layoutX="972.0" prefHeight="86.0" prefWidth="79.0" text="No" textFill="#4dde90">
+                     <font>
+                        <Font name="Fredoka Bold" size="64.0" />
+                     </font>
+                  </Label>
+                  <Label id="so far" alignment="CENTER" focusTraversable="false" layoutX="1058.0" layoutY="1.0" prefHeight="86.0" prefWidth="162.0" text="so far" textFill="WHITE">
+                     <font>
+                        <Font name="Fredoka Bold" size="60.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <JFXButton id="Renew" alignment="CENTER" focusTraversable="false" layoutX="226.0" layoutY="650.0" prefHeight="107.0" prefWidth="407.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Renew Subscription">
+               <font>
+                  <Font name="Fredoka Bold" size="38.0" />
+               </font>
+            </JFXButton>
+            <JFXButton id="Cancel" alignment="CENTER" focusTraversable="false" layoutX="714.0" layoutY="650.0" prefHeight="107.0" prefWidth="407.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Cancel Subscription" textFill="#e11616">
+               <font>
+                  <Font name="Fredoka Bold" size="38.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
