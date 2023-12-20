@@ -56,8 +56,8 @@ public class Admin extends User {
         int max = 0;
         int index = 0;
         for (int i = 0; i < 12; i++) {
-            if (Subscription.monthlyRevenue[i] > max) {
-                max = Subscription.monthlyRevenue[i];
+            if (subscription.monthlyRevenue[i] > max) {
+                max = subscription.monthlyRevenue[i];
                 index = i;
             }
         }
