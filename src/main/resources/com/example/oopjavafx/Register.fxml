@@ -26,32 +26,32 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <TextField id="emailField" fx:id="f_name" layoutX="84.0" layoutY="161.0" prefHeight="32.0" prefWidth="420.0" promptText="First Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <TextField id="fnameField" fx:id="f_name" layoutX="84.0" layoutY="161.0" prefHeight="32.0" prefWidth="420.0" promptText="First Name" stylesheets="@Register.css">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField id="emailField" fx:id="l_name" layoutX="84.0" layoutY="225.0" prefHeight="32.0" prefWidth="420.0" promptText="Last Name" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <TextField id="lnameField" fx:id="l_name" layoutX="84.0" layoutY="225.0" prefHeight="32.0" prefWidth="420.0" promptText="Last Name" stylesheets="@Register.css">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <TextField id="emailField" fx:id="email" layoutX="84.0" layoutY="290.0" prefHeight="32.0" prefWidth="420.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <TextField id="emailField" fx:id="email" layoutX="84.0" layoutY="290.0" prefHeight="32.0" prefWidth="420.0" promptText="Email" stylesheets="@Register.css">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <PasswordField id="passwordField" fx:id="password" layoutX="85.0" layoutY="363.0" prefHeight="32.0" prefWidth="420.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white transparent; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <PasswordField id="passwordField" fx:id="password" layoutX="85.0" layoutY="363.0" prefHeight="32.0" prefWidth="420.0" promptText="Password" stylesheets="@Register.css">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </PasswordField>
-            <PasswordField id="passwordField" fx:id="confirmedPassword" layoutX="85.0" layoutY="429.0" prefHeight="32.0" prefWidth="420.0" promptText="Confirm Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white transparent; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <PasswordField id="passwordField" fx:id="confirmedPassword" layoutX="85.0" layoutY="429.0" prefHeight="32.0" prefWidth="420.0" promptText="Confirm Password" stylesheets="@Register.css">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
             </PasswordField>
-            <PasswordField id="passwordField" fx:id="Code" accessibleRole="TEXT_FIELD" layoutX="85.0" layoutY="510.0" prefHeight="32.0" prefWidth="250.0" promptText="Enter Code" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white transparent; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <PasswordField id="codeField" fx:id="Code" accessibleRole="TEXT_FIELD" layoutX="85.0" layoutY="510.0" prefHeight="32.0" prefWidth="250.0" promptText="Enter Code" stylesheets="@Register.css">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>

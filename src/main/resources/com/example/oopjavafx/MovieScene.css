@@ -16,7 +16,7 @@
      -fx-border-radius : 30px;
      -fx-border-style : solid;
      -fx-border-width : 2px;
-     -fx-font-size : 32px;
+     -fx-font-size : 40px;
      -fx-font-family : "fredoka";
 }
 
@@ -37,15 +37,19 @@
 }
 
 .button1 {
+    -fx-text-fill : #4dde90;
+    -fx-background-color : #2d2d2d;
+    -fx-border-color : #4dde90;
+    -fx-border-radius : 50px;
     -fx-font-size : 36px;
-    -fx-text-fill : black;
-    -fx-background-color : #4dde90;
+    -fx-text-fill : #4dde90;
     -fx-background-radius : 50px;
+    -fx-border-width : 3px;
 }
 
 .button1:hover {
-    -fx-text-fill : #4dde90;
-    -fx-background-color : #2d2d2d;
+        -fx-text-fill : black;
+        -fx-background-color : #4dde90;
 }
 
 .button2:hover {
@@ -68,5 +72,15 @@
 #RatingsPane {
     -fx-background-color : #2d2d2d;
     -fx-background-radius : 50px;
+}
+
+#remove {
+    -fx-border-color : red;
+    -fx-text-fill : red;
+}
+
+#remove:hover {
+    -fx-text-fill : black;
+    -fx-background-color : red;
 }
 

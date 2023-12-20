@@ -11,7 +11,6 @@
 
 #subscription {
      -fx-background-radius : 30px;
-     -fx-background-color : #2d2d2d;
      -fx-text-fill : white;
      -fx-border-color : #4dde90;
      -fx-border-radius : 30px;
@@ -22,9 +21,9 @@
 }
 
 #subscription:hover {
-    -fx-text-fill : #4dde90;
+    -fx-text-fill : white;
     -fx-border-color : transparent;
-    -fx-background-color : #2d2d2d;
+    -fx-background-color : #4dde90;
 }
 
 .nav {
@@ -32,8 +31,6 @@
 }
 
 .movie-container {
-     -fx-background-radius : 30px;
-     -fx-border-radius : 30px;
      -fx-background-color : #2d2d2d;
 }
 
@@ -73,4 +70,25 @@
 .ImageStructure{
 -fx-shape: "M 50 100 Q 50 50 100 50 L 650 50 Q 700 50 700 100 L 700 490 Q 700 550 650 550 L 100 550 Q 50 550 50 490 Z";
 -fx-background-color: #2E2E2E;
+}
+
+.labels1 {
+    -fx-text-fill : white;
+    -fx-font-size : 32px;
+    -fx-font-family : "fredoka";
+}
+
+.labels2 {
+    -fx-text-fill : #6f6f6f;
+    -fx-font-family : "fredoka";
+    -fx-font-size : 32px;
+}
+
+#logout {
+    -fx-border-color : red;
+}
+
+#logout:hover {
+    -fx-background-color : red;
+    -fx-text-fill : black;
 }

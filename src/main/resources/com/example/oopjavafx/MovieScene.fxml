@@ -11,14 +11,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="body" stylesheets="@MovieScene.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.MovieSceneController">
    <children>
-      <Button fx:id="Furga" layoutX="185.0" layoutY="64.0" mnemonicParsing="false" onAction="#HomePage" style="-fx-background-color: transparent;" styleClass="labels" stylesheets="@MovieScene.css" text="Furga" />
-      <JFXButton id="subscription" layoutX="1231.0" layoutY="75.0" prefHeight="84.0" prefWidth="286.0" stylesheets="@MovieScene.css" text="subscription" />
-      <ImageView fx:id="menu" fitHeight="104.0" fitWidth="136.0" layoutX="1619.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="Furga" layoutX="187.0" layoutY="62.0" mnemonicParsing="false" onAction="#HomePage" style="-fx-background-color: transparent;" styleClass="labels" stylesheets="@MovieScene.css" text="Furga" />
+      <JFXButton id="subscription" layoutX="1221.0" layoutY="65.0" prefHeight="78.0" prefWidth="316.0" stylesheets="@WatchList.css" text="Subscription" />
+      <ImageView fx:id="menu" fitHeight="142.0" fitWidth="136.0" layoutX="1583.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" scaleX="0.75" scaleY="0.75">
          <image>
             <Image url="@Images/menuicon.png" />
          </image>
       </ImageView>
-      <TextField layoutX="452.0" layoutY="84.0" prefHeight="59.0" prefWidth="631.0" styleClass="search" stylesheets="@WatchList.css">
+      <TextField layoutX="452.0" layoutY="80.0" prefHeight="59.0" prefWidth="631.0" styleClass="search" stylesheets="@WatchList.css">
          <font>
             <Font size="28.0" />
          </font>
@@ -61,7 +61,7 @@
                   <Font name="Fredoka Bold" size="44.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="Logout" focusTraversable="false" layoutX="70.0" layoutY="771.0" onAction="#Logout" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" style="-fx-text-fill: red;" styleClass="Subscription" stylesheets="@Style.css" text="Log out" textFill="WHITE">
+            <JFXButton id="logout" fx:id="Logout" focusTraversable="false" layoutX="70.0" layoutY="771.0" onAction="#Logout" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Log out" textFill="WHITE">
                <font>
                   <Font name="Fredoka Bold" size="44.0" />
                </font>

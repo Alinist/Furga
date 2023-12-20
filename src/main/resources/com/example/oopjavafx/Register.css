@@ -3,8 +3,23 @@
 }
 
 #emailField,
-#passwordField {
+#passwordField,
+#fnameField,
+#lnameField,
+#codeField{
     -fx-text-fill : #4dde90;
+    -fx-background-color :  transparent;
+    -fx-border-color :  transparent transparent white;
+    -fx-border-width :  3px;
+    -fx-padding :  0 0 5px -5px;
+}
+
+#emailField:focused,
+#passwordField:focused,
+#fnameField:focused,
+#lnameField:focused,
+#codeField:focused {
+    -fx-border-color :  transparent transparent #4dde90;
 }
 
 .changeToSignIn {
@@ -21,9 +36,11 @@
 #button {
     -fx-background-color : #4dde90;
     -fx-background-radius : 30px;
+    -fx-border-radius : 30px;
 }
 
 #button:hover {
     -fx-background-color : #2f2f2f;
     -fx-text-fill : #4dde90;
+    -fx-border-color : #4dde90;
 }

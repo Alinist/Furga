@@ -29,12 +29,12 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <TextField id="emailField" fx:id="email" layoutX="87.0" layoutY="206.0" prefHeight="32.0" prefWidth="420.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <TextField id="emailField" fx:id="email" layoutX="87.0" layoutY="206.0" prefHeight="32.0" prefWidth="420.0" promptText="Email" stylesheets="@Login.css">
                <font>
                   <Font size="20.0" />
                </font>
             </TextField>
-            <PasswordField id="passwordField" fx:id="password" layoutX="87.0" layoutY="306.0" prefHeight="32.0" prefWidth="420.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: transparent transparent white transparent; -fx-border-width: 3px; -fx-padding: 0 0 5px -5px;" stylesheets="@Login.css">
+            <PasswordField id="passwordField" fx:id="password" layoutX="87.0" layoutY="306.0" prefHeight="32.0" prefWidth="420.0" promptText="Password" stylesheets="@Login.css">
                <font>
                   <Font name="Arial" size="20.0" />
                </font>
