@@ -5,20 +5,24 @@ import java.util.*;
 
 public class User {
     ////////////////////////////////////Fields/////////////////////////////////////////////////////////
-    private final String User_ID;
+    protected final String User_ID;
     protected boolean suspended = false;
     protected boolean loggedIn = false;
     private HashMap MoviesStatues = new HashMap();
     private HashMap MoviesRatings = new HashMap();
-    private static ArrayList<Movie> MovieList = new ArrayList<Movie>();
+
+    protected static ArrayList<Actor> ActorList = new ArrayList<>();
+    protected static ArrayList<Director> DirectorList = new ArrayList<>();
+    protected static ArrayList<Movie> MovieList = new ArrayList<Movie>();
     private ArrayList<Movie> Watched = new ArrayList<Movie>();
     private ArrayList<Movie> Later = new ArrayList<Movie>();
+
     public Subscription subscription = new Subscription();
-    private String first_name;
-    private String last_name;
-    private String user_email;
-    private String user_password;
-    private String theme_preference;
+    protected String first_name;
+    protected String last_name;
+    protected String user_email;
+    protected String user_password;
+    protected String theme_preference;
 
 
     /********************** Constructor**********************/
@@ -159,27 +163,49 @@ public class User {
     }
 
 
-
-    /////////////////MovieList
-
-    public static void addMovieToMovieList(Movie movie) {
-
-        boolean Is_Added_Before_InMovieList = false;
-        for (int i = 0; i < MovieList.size(); i++) {
-            if (MovieList.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-                Is_Added_Before_InMovieList = true;
-                break;
+    /////////////////ActorList
+    public static void getActorList() {
+        System.out.println("Actor List : ");
+        if(ActorList.isEmpty()) {
+            System.out.println("No Actor yet");
+        } else {
+            for (int i = 0; i < ActorList.size(); i++) {
+                System.out.println(i + 1 + ") " + ActorList.get(i).getFirst_name()+' '+ ActorList.get(i).getLast_name());
             }
         }
-        if (!Is_Added_Before_InMovieList){
-            MovieList.add(movie);
+    }
+
+    public static void SearchActorByName(String name_of_Actor){
+        int index = 1;
+        for (int i = 0; i <ActorList.size(); i++) {
+            if (ActorList.get(i).getFirst_name().contains(name_of_Actor) || ActorList.get(i).getLast_name().contains(name_of_Actor) ){
+                System.out.println(i + 1 + ") " + ActorList.get(i).getFirst_name()+' '+ ActorList.get(i).getLast_name());
+            }
         }
     }
 
-    public static void removeMovieFromMovieList(Movie movie) {
-        MovieList.remove(movie);
+    /////////////////DirectorList
+    public static void getDirectorList() {
+        System.out.println("Director List : ");
+        if(DirectorList.isEmpty()) {
+            System.out.println("No Director yet");
+        } else {
+            for (int i = 0; i < DirectorList.size(); i++) {
+                System.out.println(i + 1 + ") " + DirectorList.get(i).getFirst_name()+' '+ DirectorList.get(i).getLast_name());
+            }
+        }
     }
 
+    public static void SearchDirectorByName(String name_of_Director){
+        int index = 1;
+        for (int i = 0; i <DirectorList.size(); i++) {
+            if (DirectorList.get(i).getFirst_name().contains(name_of_Director) || DirectorList.get(i).getLast_name().contains(name_of_Director) ){
+                System.out.println(i + 1 + ") " + DirectorList.get(i).getFirst_name()+' '+ DirectorList.get(i).getLast_name());
+            }
+        }
+    }
+
+    /////////////////MovieList
     public static void getMovieList() {
         System.out.println("Movie List : ");
         if(MovieList.isEmpty()) {
