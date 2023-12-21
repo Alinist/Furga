@@ -10,13 +10,12 @@ import java.util.*;
 
 public class Movie {
 
-    //////////////////////////////////////////////////Fields////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////// Fields////////////////////////////////////////////////////////////
 
     ArrayList<Float> Ratings = new ArrayList<Float>();
-    private boolean Is_Watched= false; // status
+    private boolean Is_Watched = false; // status
 
     public int watchcount;
-
 
     private final int movieID; // can be seen by Director
 
@@ -28,11 +27,12 @@ public class Movie {
 
     public String[] Genres; // Amgad change from private to public for search reasons
 
-    //public Director director = new Director(); // Director object
+    // public Director director = new Director(); // Director object
 
-    private Actor[] Cast ; // Defining the array of cast
+    // Defining the array of cast
+    public ArrayList<Actor> Cast = new ArrayList<Actor>();
 
-    String[] Languages;
+    String Language;
 
     public double imdb_score; // over all rating wala THE IMDB score for the actual site?
 
@@ -59,24 +59,25 @@ public class Movie {
     public Movie() {
         user_Rating = 0;
         Is_Watched = false;
-//        this.movieID = UUID.randomUUID().toString();
+        // this.movieID = UUID.randomUUID().toString();
         this.movieID = 0;
         this.movieTitle = null;
         this.releaseDate = null;
         this.RunningTime = 0;
         Genres = null;
-        Languages = null;
+        Language = null;
         imdb_score = 0;
         country = null;
         this.budget = 0;
         this.revenue = 0;
     }
+
     public Movie(int movieID) {
         this.movieID = movieID;
     }
 
     public Movie(boolean is_Watched, int movieID, String movieTitle, String releaseDate, int runningTime,
-                 double imdb_score, String country, double budget, double revenue) {
+            double imdb_score, String country, double budget, double revenue) {
         Is_Watched = is_Watched;
         this.movieID = movieID;
         this.movieTitle = movieTitle;
@@ -88,7 +89,25 @@ public class Movie {
         this.revenue = revenue;
     }
 
-    ///////////////////////////////////////////////Setters and Getters//////////////////////////////////////////////////
+    /////////////////////////////////////////////// Setters and
+    /////////////////////////////////////////////// Getters//////////////////////////////////////////////////
+    public void setCast(ArrayList<Actor> cast) {
+        this.Cast = cast;
+    }
+
+    public ArrayList<Actor> getCast() {
+        return this.Cast;
+    }
+
+    public String getMovieDirector() {
+        String dFullName = director.first_name + " " + director.last_name;
+        return dFullName;
+    }
+
+    public void setMovieDirector(Director d) {
+        director = d;
+    }
+
     public void writeMovieToFile(Movie movie) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(MOVIES_FILE_PATH, true))) {
             writer.write("ID: " + movie.getMovieID());
@@ -112,6 +131,7 @@ public class Movie {
             throw new RuntimeException(e);
         }
     }
+
     public void extractMovieInfo(String movieTitle, String infoKey) {
         try (BufferedReader reader = new BufferedReader(new FileReader(MOVIES_FILE_PATH))) {
             String line;
@@ -144,6 +164,7 @@ public class Movie {
             throw new RuntimeException(e);
         }
     }
+
     public void extractDirectorInfo(String firstName, String lastName, String infoKey) {
         try (BufferedReader reader = new BufferedReader(new FileReader(DIRECTORS_FILE_PATH))) {
             String line;
@@ -154,7 +175,8 @@ public class Movie {
                 if (line.startsWith("Firstname:") && line.substring(10).trim().equalsIgnoreCase(firstName)) {
                     // Check the next line for the last name
                     String nextLine = reader.readLine();
-                    if (nextLine != null && nextLine.startsWith("Lastname:") && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
+                    if (nextLine != null && nextLine.startsWith("Lastname:")
+                            && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
                         directorFound = true;
                     }
                 }
@@ -192,7 +214,8 @@ public class Movie {
                 if (line.startsWith("Firstname:") && line.substring(10).trim().equalsIgnoreCase(firstName)) {
                     // Check the next line for the last name
                     String nextLine = reader.readLine();
-                    if (nextLine != null && nextLine.startsWith("Lastname:") && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
+                    if (nextLine != null && nextLine.startsWith("Lastname:")
+                            && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
                         actorFound = true;
                     }
                 }
@@ -221,11 +244,10 @@ public class Movie {
 
     // Other class methods
 
-
     // Other class methods
 
     public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;//.toLowerCase()
+        this.movieTitle = movieTitle;// .toLowerCase()
     }
 
     public void setReleaseDate(String releaseDate) {
@@ -236,14 +258,13 @@ public class Movie {
         RunningTime = runningTime;
     }
 
-    public void setGenres(String ...genres) {
+    public void setGenres(String... genres) {
         Genres = new String[genres.length];
         System.arraycopy(genres, 0, Genres, 0, genres.length);
     }
 
-    public void setLanguages(String ...languages) {
-        Languages = new String[languages.length];
-        System.arraycopy(languages, 0, Languages, 0, languages.length);
+    public void setLanguage(String language) {
+        this.Language = language;
     }
 
     public void setCountry(String country) {
@@ -274,20 +295,25 @@ public class Movie {
         return RunningTime;
     }
 
-    public void getGenres() {   /////alinist's method
-        System.out.println("\nthis movie's genres are :");
-        for(String Genre: Genres) {
-            System.out.print(Genre + " ");
-        }
+    public String[] getGenres() { ///// alinist's method
+        return Genres;
     }
-
 
     public double getImdb_score() {
         imdb_score = 0;
-        for(int i = 0 ; i < Ratings.size() ; i++) {
-            imdb_score+= Ratings.get(i);
+        for (int i = 0; i < Ratings.size(); i++) {
+            imdb_score += Ratings.get(i);
         }
-        double result = imdb_score/Ratings.size();
+        double result = imdb_score / Ratings.size();
+        return Math.round(result * 10) / 10.0;
+    }
+
+    public double setImdb_score() {
+        imdb_score = 0;
+        for (int i = 0; i < Ratings.size(); i++) {
+            imdb_score += Ratings.get(i);
+        }
+        double result = imdb_score / Ratings.size();
         return Math.round(result * 10) / 10.0;
     }
 
@@ -311,11 +337,9 @@ public class Movie {
         return Is_Watched;
     }
 
-
-
-//    public void DisplayMovieDetails() {
-//        System.out.println( this.movieTitle + " Details are : ");
-//        System.out.println();
-//    }
+    // public void DisplayMovieDetails() {
+    // System.out.println( this.movieTitle + " Details are : ");
+    // System.out.println();
+    //     }
 
 }

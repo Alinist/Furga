@@ -6,13 +6,296 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Main extends Application {
+    public static ArrayList<Movie> moviesData = new ArrayList<Movie>();
+    public static ArrayList<Actor> actorsData = new ArrayList<Actor>();
+    public static ArrayList<Director> directorData = new ArrayList<Director>();
+    public static ArrayList<User> userData = new ArrayList<User>();
+
+    public void readUsers() {
+        try {
+            String readLine = "";
+            FileReader reader = new FileReader("src\\main\\resources\\Files\\users.txt");
+            int c;
+            while ((c = reader.read()) != -1) {
+                readLine += (char) c;
+            }
+            reader.close();
+            String fnameReadText = "", lnameReadText = "", emailReadText = "", pwReadText = "";
+            String userStringData[] = { fnameReadText, lnameReadText, emailReadText, pwReadText };
+            int dataIndex = 0;
+            for (int i = 0; i < readLine.length(); i++) {
+                int length = 0;
+                userStringData[dataIndex] = "";
+                String lengthSubsStr = readLine.substring(i, readLine.indexOf('#', i));
+
+                length = Integer.parseInt(lengthSubsStr);
+                i = readLine.indexOf('#', i);
+                for (int j = 1; j < length + 1; j++) {
+                    userStringData[dataIndex] += readLine.charAt(i + j);
+                }
+                i += userStringData[dataIndex].length();
+                dataIndex++;
+                if (dataIndex == 4) {
+                    dataIndex = 0;
+                    User u = new User();
+                    u.setFirst_name(userStringData[0]);
+                    u.setLast_name(userStringData[1]);
+                    u.setUser_email(userStringData[2]);
+                    u.setUser_password(userStringData[3]);
+                    userData.add(u);
+                    System.out.println( // For testing
+                            "User: " + u.getFirst_name() + " " + u.getLast_name() + " " + u.getUser_email() + " "
+                                    + u.getUser_password() + "     USERS NUM NOW: " + userData.size());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void readActors() {
+        try {
+            String readLine = "";
+            FileReader reader = new FileReader("src\\main\\resources\\Files\\actors.txt");
+            int c;
+            while ((c = reader.read()) != -1) {
+                readLine += (char) c;
+            }
+            reader.close();
+            String actorsStringData[] = new String[5];
+            int dataIndex = 0;
+            for (int i = 0; i < readLine.length(); i++) {
+                int length = 0;
+                actorsStringData[dataIndex] = "";
+                String lengthSubsStr = readLine.substring(i, readLine.indexOf('#', i));
+
+                length = Integer.parseInt(lengthSubsStr);
+                i = readLine.indexOf('#', i);
+                for (int j = 1; j < length + 1; j++) {
+                    actorsStringData[dataIndex] += readLine.charAt(i + j);
+                }
+                i += actorsStringData[dataIndex].length();
+                dataIndex++;
+                if (dataIndex == 5) {
+                    dataIndex = 0;
+                    Actor a = new Actor(actorsStringData[0], actorsStringData[1], actorsStringData[2],
+                            actorsStringData[3], Integer.parseInt(actorsStringData[4]), null, null);
+                    actorsData.add(a);
+                    System.out.println( // For testing
+                            "Actor: " + a.getFirst_name() + " " + a.getLast_name() + " " + a.getNationality() + " "
+                                    + a.getGender() + " " + a.getAge() + "     ACTORS NUM NOW: " + actorsData.size());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeActors() {
+        try {
+            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\actors.txt");
+            for (Actor a : actorsData) {
+                writer.write(a.getFirst_name().length() + "#" + a.getFirst_name());
+                writer.write(a.getLast_name().length() + "#" + a.getLast_name());
+                writer.write(a.getNationality().length() + "#" + a.getNationality());
+                writer.write(a.getGender().length() + "#" + a.getGender());
+                writer.write(String.valueOf(a.getAge()).length() + "#" + a.getAge());
+            }
+            writer.close();
+
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    public void readDirectors() {
+        try {
+            String readLine = "";
+            FileReader reader = new FileReader("src\\main\\resources\\Files\\directors.txt");
+            int c;
+            while ((c = reader.read()) != -1) {
+                readLine += (char) c;
+            }
+            reader.close();
+            String directorsStringData[] = new String[5];
+            int dataIndex = 0;
+            for (int i = 0; i < readLine.length(); i++) {
+                int length = 0;
+                directorsStringData[dataIndex] = "";
+                String lengthSubsStr = readLine.substring(i, readLine.indexOf('#', i));
+
+                length = Integer.parseInt(lengthSubsStr);
+                i = readLine.indexOf('#', i);
+                for (int j = 1; j < length + 1; j++) {
+                    directorsStringData[dataIndex] += readLine.charAt(i + j);
+                }
+                i += directorsStringData[dataIndex].length();
+                dataIndex++;
+                if (dataIndex == 5) {
+                    dataIndex = 0;
+                    Director d = new Director(directorsStringData[0], directorsStringData[1], directorsStringData[2],
+                            directorsStringData[3], Integer.parseInt(directorsStringData[4]), null, null);
+                    directorData.add(d);
+                    System.out.println( // For testing
+                            "Director: " + d.getFirst_name() + " " + d.getLast_name() + " " + d.getNationality() + " "
+                                    + d.getGender() + " " + d.getAge() + "     DIRECTORS NUM NOW: "
+                                    + directorData.size());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeDirectors() {
+        try {
+            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\directors.txt");
+            for (Director d : directorData) {
+                writer.write(d.getFirst_name().length() + "#" + d.getFirst_name());
+                writer.write(d.getLast_name().length() + "#" + d.getLast_name());
+                writer.write(d.getNationality().length() + "#" + d.getNationality());
+                writer.write(d.getGender().length() + "#" + d.getGender());
+                writer.write(String.valueOf(d.getAge()).length() + "#" + d.getAge());
+            }
+            writer.close();
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    public void readMovies() {
+        try {
+            String readLine = "";
+            FileReader reader = new FileReader("src\\main\\resources\\Files\\movies.txt");
+            int c;
+            while ((c = reader.read()) != -1) {
+                readLine += (char) c;
+            }
+            reader.close();
+
+            String movieStringData[] = new String[10];
+            String movieCastNames[] = {};
+            int dataIndex = 0;
+            for (int i = 0; i < readLine.length(); i++) {
+                int length = 0;
+                movieStringData[dataIndex] = "";
+                String lengthSubsStr = readLine.substring(i, readLine.indexOf('#', i));
+                // System.out.println("STRING: " + lengthSubsStr);
+                // System.out.println(i);
+
+                length = Integer.parseInt(lengthSubsStr);
+                i = readLine.indexOf('#', i);
+                for (int j = 1; j < length + 1 && (i + j) < readLine.length(); j++) {
+                    movieStringData[dataIndex] += readLine.charAt(i + j);
+                }
+                i += movieStringData[dataIndex].length();
+                // System.out.println(movieStringData[dataIndex]); // For testing
+                dataIndex++;
+                if (dataIndex == 7) {
+                    Movie m = new Movie();
+                    dataIndex++;
+                    Person p = new Director("", "", "", "", 0, null, null);
+                    for (Director d : directorData) {
+                        if (d.getFirst_name().equals(movieStringData[2])
+                                && d.getLast_name().equals(movieStringData[3])) {
+                            p = d;
+                            break;
+                        }
+                    }
+                    m.setMovieTitle(movieStringData[0]);
+                    m.setReleaseDate(movieStringData[1]);
+                    m.setGenres(movieStringData[4].split("/"));
+                    m.director = (Director) p;
+                    m.setLanguage(movieStringData[5]);
+                    m.setRunningTime(Integer.parseInt(movieStringData[6]));
+                    length = 0;
+                    movieStringData[dataIndex] = "";
+                    lengthSubsStr = readLine.substring(i + 1, readLine.indexOf('$', i));
+                    length = Integer.parseInt(lengthSubsStr);
+                    i = readLine.indexOf('$', i);
+                    for (int j = 1; j < length + 1 && (i + j) < readLine.length(); j++) {
+                        movieStringData[dataIndex] += readLine.charAt(i + j);
+                    }
+                    i += movieStringData[dataIndex].length();
+                    movieCastNames = movieStringData[dataIndex].split("-");
+                    for (String actName : movieCastNames) {
+                        String[] nameParts = actName.split(" ");
+                        for (Actor a : actorsData) {
+                            if (a.first_name.equals(nameParts[0]) && a.last_name.equals(nameParts[1])) {
+                                m.getCast().add(a);
+                            }
+                        }
+                    }
+                    moviesData.add(m);
+                    dataIndex = 0;
+                    System.out.println( // For testing
+                            "Movie: " + m.getMovieTitle() + " " + m.getReleaseDate() + " " +
+                                    m.director.getFirst_name() + " " + m.director.getLast_name() + " "
+                                    + m.Language + " " + m.getRunningTime() + "min. " + "     MOVIES NUM NOW: "
+                                    + moviesData.size());
+                    for (Actor a : m.Cast) {
+                        System.out.println(a.first_name + " " + a.last_name);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeMovies() {
+        try {
+            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\movies.txt");
+            String castString = "";
+            for (Movie m : moviesData) {
+                writer.write(m.getMovieTitle().length() + "#" + m.getMovieTitle());
+                writer.write(m.getReleaseDate().length() + "#" + m.getReleaseDate());
+                writer.write(m.director.getFirst_name().length() + "#" + m.director.getFirst_name());
+                writer.write(m.director.getLast_name().length() + "#" + m.director.getLast_name());
+                writer.write(Arrays.stream(m.getGenres()).collect(Collectors.joining("/")).length() + "#"
+                        + Arrays.stream(m.getGenres()).collect(Collectors.joining("/")));
+                writer.write(m.Language.length() + "#" + m.Language);
+                writer.write(String.valueOf(m.getRunningTime()).length() + "#" + m.getRunningTime());
+                for (Actor a : m.Cast) {
+                    castString += ("-" + a.getFirst_name() + " " + a.getLast_name());
+                }
+                writer.write(castString.length() + "$" + castString);
+            }
+            writer.close();
+
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    public void writeUsers() {
+        try {
+            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\users.txt");
+            for (User u : userData) {
+                writer.write(u.getFirst_name().length() + "#" + u.getFirst_name());
+                writer.write(u.getLast_name().length() + "#" + u.getLast_name());
+                writer.write(u.getUser_email().length() + "#" + u.getUser_email());
+                writer.write(u.getUser_password().length() + "#" + u.getUser_password());
+            }
+            writer.close();
+
+        } catch (Exception e) {
+            return;
+        }
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
+        readUsers();
+        readActors();
+        readDirectors();
+        readMovies();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
@@ -26,6 +309,12 @@ public class Main extends Application {
         scene.getStylesheets().add(getClass().getResource("Style.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("WatchList.css").toExternalForm());
         scene.getStylesheets().add(getClass().getResource("MovieScene.css").toExternalForm());
+        stage.setOnCloseRequest(event -> {
+            writeUsers();
+            writeActors();
+            writeDirectors();
+            writeMovies();
+        });
     }
 
     public static void main(String[] args) {
