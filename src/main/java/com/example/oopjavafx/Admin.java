@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Admin extends User {
 
-//    public User getUser(String userID) {
+    //    public User getUser(String userID) {
 //        ArrayList<User> userList = new ArrayList<>();
 //        for (User user : userList) {
 //            if (user.getUser_ID().equals(userID)) {
@@ -16,17 +16,17 @@ public class Admin extends User {
 //        return null;
 //    }
     public static void addActorToActorList(Actor actor) {
-    boolean Is_Added_Before_InList = false;
-    for (int i = 0; i < ActorList.size(); i++) {
-        if (ActorList.get(i).getFirst_name().equalsIgnoreCase(actor.getFirst_name()) && ActorList.get(i).getLast_name().equalsIgnoreCase(actor.getLast_name()) ){
-            Is_Added_Before_InList = true;
-            break;
+        boolean Is_Added_Before_InList = false;
+        for (int i = 0; i < ActorList.size(); i++) {
+            if (ActorList.get(i).getFirst_name().equalsIgnoreCase(actor.getFirst_name()) && ActorList.get(i).getLast_name().equalsIgnoreCase(actor.getLast_name()) ){
+                Is_Added_Before_InList = true;
+                break;
+            }
+        }
+        if (!Is_Added_Before_InList){
+            ActorList.add(actor);
         }
     }
-    if (!Is_Added_Before_InList){
-       ActorList.add(actor);
-    }
-}
 
     public static void removeActorFromActorList(Actor actor) {
         ActorList.remove(actor);
@@ -67,7 +67,7 @@ public class Admin extends User {
         MovieList.remove(movie);
     }
 
-//    public void resetRating(Movie movie) {
+    //    public void resetRating(Movie movie) {
 //        for (Float rating : movie.Ratings) {
 //            rating = 0f;
 //        }

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
 
-
-<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.WatchedMovieController">
+<HBox fx:id="WatchedMovie" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.WatchedMovieController">
    <children>
       <AnchorPane prefHeight="524.0" prefWidth="1550.0" styleClass="movie-container" stylesheets="@WatchList.css">
          <children>

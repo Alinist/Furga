@@ -10,7 +10,7 @@
 
 <HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.SearchedMovieController">
    <children>
-      <AnchorPane prefHeight="524.0" prefWidth="1550.0" styleClass="movie-container" stylesheets="@WatchList.css">
+      <AnchorPane prefHeight="524.0" prefWidth="1550.0" style="-fx-background-color: #1c1c1c;" stylesheets="@WatchList.css">
          <children>
             <ImageView fitHeight="476.0" fitWidth="306.0" layoutX="40.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="384.0" layoutY="68.0" prefHeight="71.0" prefWidth="951.0" style="-fx-font-size: 60px;" styleClass="labels1" stylesheets="@MovieScene.css" text="MovieName + ReleaseDate" />
@@ -28,7 +28,7 @@
             <Label layoutX="587.0" layoutY="372.0" prefHeight="39.0" prefWidth="75.0" styleClass="labels1" stylesheets="@MovieScene.css" text="0/10" />
             <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="660.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Images/6d009e1b243cc054596b94082499e2ce.png" />
+                  <Image url="@Images/6d009e1b243cc054596b94082499e2cee.png" />
                </image>
             </ImageView>
             <JFXButton fx:id="WatchNow" layoutX="429.0" layoutY="434.0" onAction="#WatchMovie" prefHeight="80.0" prefWidth="280.0" styleClass="button1" stylesheets="@MovieScene.css" text="Watch Now" />

@@ -77,7 +77,7 @@ public class Movie {
     }
 
     public Movie(boolean is_Watched, String movieID, String movieTitle, String releaseDate, int runningTime,
-            double imdb_score, String country, double budget, double revenue) {
+                 double imdb_score, String country, double budget, double revenue) {
         Is_Watched = is_Watched;
         this.movieID = movieID;
         this.movieTitle = movieTitle;

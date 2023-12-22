@@ -21,27 +21,27 @@ public class Plan {
         checkPlanConstraints(this.typeOfPlan);
     }
 
-     public void checkPlanConstraints(String plan)
-     {
-         if(plan.equals("Basic"))
-         {
-             StartDate = Calendar.getInstance();
-             numberOfMovies= 5;
-         }
-         else if(plan.equals("Standard"))
-         {
-             StartDate = Calendar.getInstance();
-             numberOfMovies= 10;
-         }
-         else if(plan.equals("Premium"))
-         {
-             StartDate = Calendar.getInstance();
-             numberOfMovies= 30;
-         }
-         else
-         {
-             StartDate = null;
-             numberOfMovies =0;
-         }
-     }
+    public void checkPlanConstraints(String plan)
+    {
+        if(plan.equals("Basic"))
+        {
+            StartDate = Calendar.getInstance();
+            numberOfMovies= 5;
+        }
+        else if(plan.equals("Standard"))
+        {
+            StartDate = Calendar.getInstance();
+            numberOfMovies= 10;
+        }
+        else if(plan.equals("Premium"))
+        {
+            StartDate = Calendar.getInstance();
+            numberOfMovies= 30;
+        }
+        else
+        {
+            StartDate = null;
+            numberOfMovies =0;
+        }
+    }
 }

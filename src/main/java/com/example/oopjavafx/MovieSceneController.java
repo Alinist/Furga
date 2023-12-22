@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -34,7 +35,8 @@ import static java.lang.Integer.parseInt;
 
 
 public class MovieSceneController implements Initializable {
-
+    @FXML
+    private TextField SearchBar;
 
     @FXML
     private AnchorPane pane1;
@@ -98,6 +100,9 @@ public class MovieSceneController implements Initializable {
 
     @FXML
     private Button RatingTheMovie;
+
+    @FXML
+    private Label UserName;
 
     private boolean menuOpened = false;
 
@@ -471,6 +476,23 @@ public class MovieSceneController implements Initializable {
     @FXML
     void Later(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Later.fxml"));
+        ChangeScene(event);
+        stage.setResizable(true);
+    }
+
+    public void Search(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
+        root = loader.load();
+        SearchController searchController = loader.getController();
+        searchController.SearchBar.setText(SearchBar.getText());
+        ChangeScene(event);
+        stage.setResizable(true);
+        stage.setResizable(true);
+    }
+
+    public void Subscription(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);
     }

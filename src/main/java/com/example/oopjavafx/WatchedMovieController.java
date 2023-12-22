@@ -7,11 +7,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class WatchedMovieController {
+
+    @FXML
+    public HBox WatchedMovie;
 
     private Scene scene1;
     private Stage stage;
@@ -21,7 +25,7 @@ public class WatchedMovieController {
     private Button Rate;
 
     @FXML
-    private Button Remove;
+    public Button Remove;
 
     @FXML
     private Button WatchNow;
@@ -40,7 +44,7 @@ public class WatchedMovieController {
     }
 
     @FXML
-    void RemoveFromWatched(ActionEvent event) {
+    void RemoveFromWatched(ActionEvent event) throws IOException {
 
     }
 

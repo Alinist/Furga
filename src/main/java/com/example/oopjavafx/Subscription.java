@@ -80,10 +80,10 @@ public class Subscription {
     public boolean CheckIfSubscriptionEnding(Calendar today)
     {
         try{
-        int SECONDS_IN_A_DAY = 24 * 60 * 60;
-        long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
-        long diffSec = diff / 1000;
-        long days = diffSec / SECONDS_IN_A_DAY;
+            int SECONDS_IN_A_DAY = 24 * 60 * 60;
+            long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
+            long diffSec = diff / 1000;
+            long days = diffSec / SECONDS_IN_A_DAY;
 
 
             if( plan.numberOfMovies==0 || days == 0)

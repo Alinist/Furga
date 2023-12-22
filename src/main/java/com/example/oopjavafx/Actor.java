@@ -20,7 +20,7 @@ public class Actor extends Person{
      */
     public int number_of_awards;
 
-    private static final String ACTORS_FILE_PATH = "actors.txt";
+    private static final String ACTORS_FILE_PATH = "actors.txt.txt";
 
     private static final String MOVIES_FILE_PATH = "movies.txt";
 
@@ -41,6 +41,8 @@ public class Actor extends Person{
         this.movies = movies;
         this.awards = awards;
     }
+
+
     public void writeActorToFile(Actor actor) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ACTORS_FILE_PATH, true))) {
             writer.write("Firstname: " + actor.getFirst_name());

@@ -10,7 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,9 +22,10 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class LaterListController implements Initializable{
+public class SearchController implements Initializable {
 
     private boolean menuOpened = false;
 
@@ -41,8 +42,26 @@ public class LaterListController implements Initializable{
         stage.show();
     }
 
+    private String[] sortbyItems = {"Any", "Rating", "Release Date"};
+
+    private String[] genreItems = {"Any", "Action", "Comedy", "Adventure"};
+
+    private String[] typeItems = {"Any", "Movie", "Director", "Actor"};
+
     @FXML
-    private TextField SearchBar;
+    private ComboBox<String> GenreBox;
+    @FXML
+    private ComboBox<String> SortByBox;
+
+    @FXML
+    private ComboBox<String> TypeBox;
+
+    @FXML
+    private VBox MovieListLayout;
+
+    @FXML
+    TextField SearchBar;
+
 
     @FXML
     private Button Furga;
@@ -54,9 +73,6 @@ public class LaterListController implements Initializable{
     private Button Logout;
 
     @FXML
-    VBox MovieListLayout;
-
-    @FXML
     private ImageView menu;
 
     @FXML
@@ -65,36 +81,52 @@ public class LaterListController implements Initializable{
     @FXML
     private AnchorPane pane2;
 
-    @FXML
-    private Label UserName;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        SortByBox.getItems().addAll(sortbyItems);
+        GenreBox.getItems().addAll(genreItems);
+        TypeBox.getItems().addAll(typeItems);
+        SortByBox.getSelectionModel().selectFirst();
+        GenreBox.getSelectionModel().selectFirst();
+        TypeBox.getSelectionModel().selectFirst();
         ArrayList<Movie> movies = new ArrayList<>(Movies());
+        ArrayList<Actor> actors = new ArrayList<>(Actors());
 ////        for (int i = 0 ; i < movies.size() ; i++) {
 ////
 ////        }
         for(int i = 0 ; i < movies.size() ; i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("LaterMovie.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
 
             try {
                 HBox hbox = fxmlLoader.load();
-                LaterMovieController laterMovieController = fxmlLoader.getController();
+                SearchedMovieController searchedMovieController = fxmlLoader.getController();
                 MovieListLayout.getChildren().add(hbox);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+        for(int i = 0 ; i < actors.size() ; i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Actor.fxml"));
 
+            try {
+                HBox hbox = fxmlLoader.load();
+                ActorController actorController = fxmlLoader.getController();
+                MovieListLayout.getChildren().add(hbox);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         pane1.setVisible(false);
 
         FadeTransition fadeTransition=new FadeTransition(Duration.seconds(0.25),pane1);
         fadeTransition.setFromValue(1);
         fadeTransition.setToValue(0);
         fadeTransition.play();
-
         TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(0.25),pane2);
         translateTransition.setByX(+600);
         translateTransition.play();
@@ -145,9 +177,29 @@ public class LaterListController implements Initializable{
         movie.setMovieTitle("spiderman");
         Movies.add(movie);
 
+        movie.setMovieTitle("avengers");
+        Movies.add(movie);
+
+        movie.setMovieTitle("spiderman");
+        Movies.add(movie);
+
+        movie.setMovieTitle("avengers");
+        Movies.add(movie);
+
+        movie.setMovieTitle("spiderman");
+        Movies.add(movie);
+
         return Movies;
     }
 
+    private ArrayList<Actor> Actors() {
+        String[] movies = {"avengers", "spiderman"};
+        String[] awards = {"best actor", "most beloved actor"};
+        ArrayList<Actor> Actors = new ArrayList<>();
+        Actor actor1 = new Actor("Ali","Ashraf", "Egyption", "Male", 19,new ArrayList<String>(List.of(movies)),new ArrayList<String>(List.of(movies)));
+        Actors.add(actor1);
+        return Actors;
+    }
     public void Logout(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         ChangeScene(event);
@@ -174,16 +226,6 @@ public class LaterListController implements Initializable{
     void WatchedList(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("WatchList.fxml"));
         ChangeScene(event);
-    }
-
-    public void Search(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
-        root = loader.load();
-        SearchController searchController = loader.getController();
-        searchController.SearchBar.setText(SearchBar.getText());
-        ChangeScene(event);
-        stage.setResizable(true);
-        stage.setResizable(true);
     }
 
     public void Subscription(ActionEvent event) throws IOException {

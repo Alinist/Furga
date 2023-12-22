@@ -11,10 +11,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -36,19 +39,10 @@ public class HomePageController implements Initializable {
     private Parent root;
 
     @FXML
+    private VBox MovieListLayout;
+
+    @FXML
     private Button ForYouButton;
-
-    @FXML
-    private ImageView ImageView1;
-
-    @FXML
-    private ImageView ImageView2;
-
-    @FXML
-    private ImageView ImageView3;
-
-    @FXML
-    private ImageView ImageView4;
 
     @FXML
     private Button Later;
@@ -66,22 +60,16 @@ public class HomePageController implements Initializable {
     private ImageView menu;
 
     @FXML
-    private Button myButton1;
-
-    @FXML
-    private Button myButton2;
-
-    @FXML
-    private Button myButton3;
-
-    @FXML
-    private Button myButton4;
-
-    @FXML
     private AnchorPane pane1;
 
     @FXML
     private AnchorPane pane2;
+
+    @FXML
+    private TextField SearchBar;
+
+    @FXML
+    private Label UserName;
 
     public void ChangeScene(ActionEvent event) {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -94,7 +82,6 @@ public class HomePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         ForYouButton.setStyle("-fx-text-fill:  #4dde90");
-        MakeImageRounded(ImageView1,"Images/image1.png");
         TrendingButton.setStyle("-fx-text-fill:  #ffffff");
         PopularButton.setStyle("-fx-text-fill:  #ffffff");
 
@@ -170,21 +157,18 @@ public class HomePageController implements Initializable {
 
     public void ForYou_Controller(ActionEvent e){
         ForYouButton.setStyle("-fx-text-fill:  #4dde90");
-        MakeImageRounded(ImageView1,"Images/image1.png");
         TrendingButton.setStyle("-fx-text-fill:  #ffffff");
         PopularButton.setStyle("-fx-text-fill:  #ffffff");
     }
 
     public void Trending_Controller(ActionEvent e){
         TrendingButton.setStyle("-fx-text-fill:  #4dde90");
-        MakeImageRounded(ImageView2,"Images/image2.png");
         ForYouButton.setStyle("-fx-text-fill:  #ffffff");
         PopularButton.setStyle("-fx-text-fill:  #ffffff");
     }
 
     public void Popular_Controller(ActionEvent e){
         PopularButton.setStyle("-fx-text-fill:  #4dde90");
-        MakeImageRounded(ImageView3,"Images/image3.png");
         TrendingButton.setStyle("-fx-text-fill:  #ffffff");
         ForYouButton.setStyle("-fx-text-fill:  #ffffff");
     }
@@ -211,5 +195,24 @@ public class HomePageController implements Initializable {
         stage.setResizable(true);
         stage.setResizable(true);
     }
+    public void Search(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
+        root = loader.load();
+        SearchController searchController = loader.getController();
+        searchController.SearchBar.setText(SearchBar.getText());
+        ChangeScene(event);
+        stage.setResizable(true);
+        stage.setResizable(true);
+    }
+
+    public void Subscription(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        root = loader.load();
+        ChangeScene(event);
+        stage.setResizable(true);
+    }
+
+
+
 
 }

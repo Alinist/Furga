@@ -1,30 +1,29 @@
 package com.example.oopjavafx;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.UUID;
 
-public class Watch_Record {
+public class Watch_Record{
 
-    private final int userId;
+    private final String userId;
     private Movie movie;
-    private Integer rating; //Integer provide null value as default which is needed for no rating case
-    private int day;
-    private int month;
-    private int year;
+    private Integer rating = 0; //Integer provide null value as default which is needed for no rating case
+    private LocalDate date;
 
-    public Watch_Record(int userId) {
+    public Watch_Record(String userId) {
         this.userId = userId;
     }
-
-    public Watch_Record(int userId, Movie movie, int rating, int day, int month, int year) {
+    public Watch_Record(String userId,Movie movie,int rating,int day,int month,int year) {
         this.userId = userId;
         this.movie = movie;
         this.rating = rating;
-        this.day = day;
-        this.month = month;
-        this.year = year;
     }
 
-    public int getUserId() {
+    public Watch_Record() {
+        userId = UUID.randomUUID().toString();
+    }
+
+    public String getUserId() {
         return userId;
     }
 
@@ -41,62 +40,21 @@ public class Watch_Record {
     }
 
     public void setRating(Integer rating) {
-        if (rating == null || rating >= 0 && rating < 5) {
+        if(rating>=1 && rating<=10) {
             this.rating = rating;
+        } else {
+            this.rating = 0;
         }
     }
+
+
 
 
     public void getDate() {
-        System.out.println(day + "/" + month + "/" + year);
+        System.out.println(date);
+    }
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public void setDate(int d, int m, int y) {
-        day = d;
-        month = m;
-        year = y;
-    }
-
-    void showThisWatchRecordDetails(Watch_Record watchRecord) {
-        System.out.println("User ID: " + watchRecord.userId);
-        System.out.println("Movie Name: " + watchRecord.movie);
-        System.out.println("Date: " + day + "/" + month + "/" + year);
-        System.out.println("Movie Rating : " + watchRecord.rating);
-    }
-
-    void getLastWatchRecord(ArrayList<Watch_Record> watchRecords) {
-        if (!watchRecords.isEmpty()) {
-            int size_w = watchRecords.size() - 1;
-            System.out.println(watchRecords.get(size_w));
-        } else {
-            System.out.println("Watch Record is Empty!");
-        }
-    }
-
-    void getAllWatchRecord(ArrayList<Watch_Record> watchRecords) {
-        if (!watchRecords.isEmpty()) {
-
-            for (Watch_Record wr : watchRecords) {
-                showThisWatchRecordDetails(wr);
-            }
-        } else {
-            System.out.println("Watch Record is Empty!");
-        }
-    }
-
-    void deletelastRecord(ArrayList<Watch_Record> watchRecords) {
-        if (!watchRecords.isEmpty()) {
-            int size_w = watchRecords.size() - 1;
-            watchRecords.remove(size_w);
-        } else System.out.println("Records are Already Empty!");
-    }
-
-    void deleteAllRecords(ArrayList<Watch_Record> watchRecords) {
-        if (!watchRecords.isEmpty()) {
-            int size_w = watchRecords.size() - 1;
-            for (int i = size_w - 1; i >= 0; i--) {
-                deletelastRecord(watchRecords);
-            }
-        } else System.out.println("Records are Already Empty!");
-    }
 }

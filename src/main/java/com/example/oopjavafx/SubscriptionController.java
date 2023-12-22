@@ -14,25 +14,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class WatchListController implements Initializable{
-
-    private boolean menuOpened = false;
-
-    private boolean BlockingPaneExists = false;
-
-    private Scene scene1;
-    private Stage stage;
-    private Parent root;
+public class SubscriptionController implements Initializable {
 
     public void ChangeScene(ActionEvent event) {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -40,9 +29,9 @@ public class WatchListController implements Initializable{
         stage.setScene(scene1);
         stage.show();
     }
+    private boolean menuOpened = false;
 
-    @FXML
-    private TextField SearchBar;
+    private boolean BlockingPaneExists = false;
 
     @FXML
     private Button Furga;
@@ -54,7 +43,10 @@ public class WatchListController implements Initializable{
     private Button Logout;
 
     @FXML
-    VBox MovieListLayout;
+    private TextField SearchBar;
+
+    @FXML
+    private Label UserName;
 
     @FXML
     private ImageView menu;
@@ -65,34 +57,57 @@ public class WatchListController implements Initializable{
     @FXML
     private AnchorPane pane2;
 
+    private Scene scene1;
+    private Stage stage;
+    private Parent root;
+
+    public void Logout(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        ChangeScene(event);
+        stage.setResizable(false);
+        stage.setWidth(1045);
+        stage.setHeight(645);
+        stage.setY(180);
+        stage.setX(437.5);
+    }
+
+    public void HomePage(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        ChangeScene(event);
+        stage.setResizable(true);
+    }
+
+    public void Later(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("Later.fxml"));
+        ChangeScene(event);
+        stage.setResizable(true);
+    }
+
     @FXML
-    private Label UserName;
+    void WatchedList(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("WatchList.fxml"));
+        ChangeScene(event);
+    }
+
+    public void Search(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
+        root = loader.load();
+        SearchController searchController = loader.getController();
+        searchController.SearchBar.setText(SearchBar.getText());
+        ChangeScene(event);
+        stage.setResizable(true);
+        stage.setResizable(true);
+    }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Movie> movies = new ArrayList<>(Movies());
-        for(int i = 0 ; i < movies.size() ; i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("WatchedMovie.fxml"));
-
-            try {
-                HBox hbox = fxmlLoader.load();
-                WatchedMovieController watchedMovieController = fxmlLoader.getController();
-                MovieListLayout.getChildren().add(hbox);
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         pane1.setVisible(false);
 
         FadeTransition fadeTransition=new FadeTransition(Duration.seconds(0.25),pane1);
         fadeTransition.setFromValue(1);
         fadeTransition.setToValue(0);
         fadeTransition.play();
-
-        TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(0.25),pane2);
+        TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(0.01),pane2);
         translateTransition.setByX(+600);
         translateTransition.play();
 
@@ -130,56 +145,5 @@ public class WatchListController implements Initializable{
                 translateTransition1.play();
             }
         });
-    }
-
-    private ArrayList<Movie> Movies() {
-        ArrayList<Movie> Movies = new ArrayList<>();
-        Movie movie = new Movie();
-
-        movie.setMovieTitle("avengers");
-        Movies.add(movie);
-
-        movie.setMovieTitle("spiderman");
-        Movies.add(movie);
-
-        return Movies;
-    }
-
-    public void Logout(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        ChangeScene(event);
-        stage.setResizable(false);
-        stage.setWidth(1045);
-        stage.setHeight(645);
-        stage.setY(180);
-        stage.setX(437.5);
-    }
-
-    public void HomePage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-        ChangeScene(event);
-        stage.setResizable(true);
-    }
-
-    public void Later(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Later.fxml"));
-        ChangeScene(event);
-        stage.setResizable(true);
-    }
-
-    public void Search(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Search.fxml"));
-        root = loader.load();
-        SearchController searchController = loader.getController();
-        searchController.SearchBar.setText(SearchBar.getText());
-        ChangeScene(event);
-        stage.setResizable(true);
-    }
-
-    public void Subscription(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
-        root = loader.load();
-        ChangeScene(event);
-        stage.setResizable(true);
     }
 }

@@ -1,0 +1,67 @@
+.combo-box {
+    -fx-background: white;
+    -fx-background-color: #2d2d2d;
+    -fx-background-radius :  30px;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em;
+    -fx-background-color : #2d2d2d;
+    -fx-font-family : "fredoka";
+    -fx-font-size : 30px;
+    -fx-text-fill : white;
+}
+
+.combo-box .list-view {
+    -fx-background-radius : 30px;
+    -fx-text-fill : white;
+    -fx-font-family : "fredoka";
+    -fx-font-weight : bold;
+    -fx-font-size : 20px;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: #4dde90;
+    -fx-text-fill : white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}
+.combo-box-popup .list-view .list-cell
+{
+    -fx-fill: black;
+    -fx-font-size : 28px;
+    -fx-padding: 4 0 4 20;
+    -fx-background-radius : 30px;
+    /* No alternate highlighting */
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-pane > .corner {
+      -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: transparent;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #4dde90;
+    -fx-background-radius: 5em;
+}
