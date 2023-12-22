@@ -15,9 +15,6 @@ public class User {
     public ArrayList<Watch_Record> Watched = new ArrayList<>();
     private HashMap MoviesStatues = new HashMap();
 
-    public void setWatched(ArrayList<Watch_Record> watched) {
-        Watched = watched;
-    }
 
     private ArrayList<Movie> Later = new ArrayList<Movie>();
     public Subscription subscription = new Subscription();
@@ -52,7 +49,9 @@ public class User {
 
 
     /////////////////Custom Methods
-
+ public void setWatched(ArrayList<Watch_Record> watched) {
+        Watched = watched;
+    }
 
     /////////////////Certain User
     public void SetUserRatingForMovie(Movie movie,int rating) { //the movie must be on the watched list first (rating is not from the user but from the site)
