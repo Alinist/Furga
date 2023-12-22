@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 public class LoginController implements Initializable {
 
+
     public boolean checkInputs(String email, String password) {
         return Pattern.compile("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$").matcher(email).find()
                 &&
@@ -40,8 +41,6 @@ public class LoginController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-    User user = new User();
 
     @FXML
     TextField email;
@@ -68,10 +67,15 @@ public class LoginController implements Initializable {
             boolean found = false;
             for (User u : Main.userData) {
                 if (u.getUser_password().equals(password.getText()) && u.getUser_email().equals(email.getText())) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+                    root = loader.load();
+                    HomePageController homePageController = loader.getController();
+                    homePageController.UserName.setText(u.getFirst_name() + " " + u.getLast_name());
+                    Main.CurrentUser = u;
                     found = true;
                     errorText.setTextFill(Color.valueOf("#4dde90"));
                     errorText.setText("Login Successfully!");
-                    root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+
                     ChangeScene(event);
                     stage.setResizable(true);
                     stage.setWidth(1920);

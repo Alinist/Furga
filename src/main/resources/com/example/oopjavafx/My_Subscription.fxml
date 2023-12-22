@@ -21,7 +21,7 @@
             </Label>
             <Group id="first name" layoutX="41.0" layoutY="163.0">
                <children>
-                  <Label id="User fname" focusTraversable="false" layoutX="354.0" prefHeight="86.0" prefWidth="929.0" text="first name of the user" textFill="WHITE">
+                  <Label id="User fname" fx:id="fName" focusTraversable="false" layoutX="354.0" prefHeight="86.0" prefWidth="929.0" text="first name of the user" textFill="WHITE">
                      <font>
                         <Font name="Fredoka Bold" size="55.0" />
                      </font>
@@ -35,7 +35,7 @@
             </Group>
             <Group id="last name" layoutX="41.0" layoutY="254.0">
                <children>
-                  <Label id="User Lname" focusTraversable="false" layoutX="351.0" prefHeight="86.0" prefWidth="929.0" text="Last name of the user" textFill="WHITE">
+                  <Label id="User Lname" fx:id="lName" focusTraversable="false" layoutX="351.0" prefHeight="86.0" prefWidth="929.0" text="Last name of the user" textFill="WHITE">
                      <font>
                         <Font name="Fredoka Bold" size="55.0" />
                      </font>
@@ -49,7 +49,7 @@
             </Group>
             <Group id="subscription" layoutX="41.0" layoutY="350.0">
                <children>
-                  <Label id="his subscription" alignment="CENTER" focusTraversable="false" layoutX="634.0" prefHeight="86.0" prefWidth="429.0" text="his subscription" textFill="WHITE">
+                  <Label id="his subscription" fx:id="subscription" alignment="CENTER" focusTraversable="false" layoutX="634.0" prefHeight="86.0" prefWidth="429.0" text="his subscription" textFill="WHITE">
                      <font>
                         <Font name="Fredoka Bold" size="55.0" />
                      </font>
@@ -68,7 +68,7 @@
                         <Font name="Fredoka Bold" size="60.0" />
                      </font>
                   </Label>
-                  <Label id="number of wathed" alignment="CENTER" layoutX="498.0" prefHeight="86.0" prefWidth="103.0" text="No" textFill="#4dde90">
+                  <Label id="number of wathed" fx:id="NoOfWatchedMovies" alignment="CENTER" layoutX="498.0" prefHeight="86.0" prefWidth="103.0" text="No" textFill="#4dde90">
                      <font>
                         <Font name="Fredoka Bold" size="64.0" />
                      </font>
@@ -78,7 +78,7 @@
                         <Font name="Fredoka Bold" size="60.0" />
                      </font>
                   </Label>
-                  <Label id="max number of watched" alignment="CENTER" layoutX="972.0" prefHeight="86.0" prefWidth="79.0" text="No" textFill="#4dde90">
+                  <Label id="max number of watched" fx:id="MaxNoOfMovies" alignment="CENTER" layoutX="972.0" prefHeight="86.0" prefWidth="79.0" text="No" textFill="#4dde90">
                      <font>
                         <Font name="Fredoka Bold" size="64.0" />
                      </font>
@@ -90,12 +90,12 @@
                   </Label>
                </children>
             </Group>
-            <JFXButton id="Renew" alignment="CENTER" focusTraversable="false" layoutX="200.0" layoutY="650.0" prefHeight="107.0" prefWidth="480.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Renew Subscription">
+            <JFXButton id="Renew" fx:id="renewSubscibtionButton" alignment="CENTER" focusTraversable="false" layoutX="200.0" layoutY="650.0" onAction="#renewSubscription" prefHeight="107.0" prefWidth="480.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Renew Subscription">
                <font>
                   <Font name="Fredoka Bold" size="38.0" />
                </font>
             </JFXButton>
-            <JFXButton id="Cancel" alignment="CENTER" focusTraversable="false" layoutX="720.0" layoutY="650.0" prefHeight="107.0" prefWidth="480.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Cancel Subscription" textFill="#e11616">
+            <JFXButton id="Cancel" alignment="CENTER" focusTraversable="false" layoutX="720.0" layoutY="650.0" onAction="#cancelSubscirption" prefHeight="107.0" prefWidth="480.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Cancel Subscription" textFill="#e11616">
                <font>
                   <Font name="Fredoka Bold" size="38.0" />
                </font>

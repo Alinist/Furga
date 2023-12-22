@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.stream.Collectors;
 import java.io.*;
 import java.util.ArrayList;
@@ -14,12 +15,62 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Main extends Application {
+    public static User CurrentUser;
     public static ArrayList<Movie> moviesData = new ArrayList<Movie>();
     public static ArrayList<Actor> actorsData = new ArrayList<Actor>();
     public static ArrayList<Director> directorData = new ArrayList<Director>();
     public static ArrayList<User> userData = new ArrayList<User>();
-    HashMap<String, ArrayList<String>> laterLists = new HashMap<>();
-    HashMap<String, ArrayList<String>> historyLists = new HashMap<>();
+    public static ArrayList<Watch_Record> watchRecordData = new ArrayList<Watch_Record>();
+    public static HashMap<String, ArrayList<Movie>> laterLists = new HashMap<>();
+    // HashMap<String, ArrayList<Movie>> historyLists = new HashMap<>();
+
+    public void readWatchRecord() {
+        try {
+            String readLine = "";
+            FileReader reader = new FileReader("src\\main\\resources\\Files\\watchrecord.txt");
+            int c;
+            while ((c = reader.read()) != -1) {
+                readLine += (char) c;
+            }
+            reader.close();
+            String currentValue = new String();
+
+            for (char character : readLine.toCharArray()) {
+                if (character != ':') {
+                    currentValue += character;
+                } else {
+                    String[] userIdMovieIdRating = currentValue.split("/");
+                    Watch_Record wr = new Watch_Record(userIdMovieIdRating[0],
+                            Movie.getMovieById(userIdMovieIdRating[1]), Integer.parseInt(userIdMovieIdRating[2]),
+                            Integer.parseInt(userIdMovieIdRating[3]), Integer.parseInt(userIdMovieIdRating[4]),
+                            Integer.parseInt(userIdMovieIdRating[5]));
+                    watchRecordData.add(wr);
+                    currentValue = "";
+                    System.out.println(
+                            "Watch Record: " + User.getUserById(watchRecordData.get(0).getUserId()).getFirst_name()
+                                    + " " + watchRecordData.get(0).getMovie().getMovieTitle() + " "
+                                    + watchRecordData.get(0).getRating());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeWatchRecord() {
+        try {
+            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\watchrecord.txt");
+            for (Watch_Record wr : watchRecordData) {
+                writer.write(wr.getUserId() + "/" + wr.getMovie().getMovieID() + "/" + wr.getRating() + "/"
+                        + wr.getDateString() + ":");
+            }
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void readLaterLists() {
         try {
@@ -38,9 +89,15 @@ public class Main extends Application {
                 } else {
                     String[] userIdAndMovies = currentValue.split("#");
                     ArrayList<String> movieIdList = new ArrayList<>(Arrays.asList(userIdAndMovies[1].split(",")));
-                    laterLists.put(userIdAndMovies[0], movieIdList);
+                    ArrayList<Movie> laterMovies = new ArrayList<>();
+                    for (String s : movieIdList) {
+                        laterMovies.add(Movie.getMovieById(s));
+                    }
+                    laterLists.put(userIdAndMovies[0], laterMovies);
                     currentValue = "";
-                    System.out.println("Later List: " + laterLists.get(userIdAndMovies[0]));
+                    System.out.println("Later List: "
+                            + Movie.getMovieById(laterLists.get(userIdAndMovies[0]).get(0).getMovieID())
+                            .getMovieTitle());
                 }
             }
 
@@ -53,7 +110,9 @@ public class Main extends Application {
         try {
             FileWriter writer = new FileWriter("src\\main\\resources\\Files\\laterlists.txt");
             for (String uid : laterLists.keySet()) {
-                writer.write(uid + "#" + String.join(",", laterLists.get(uid)) + ":");
+                int index = 0;
+                writer.write(uid + "#" + String.join(",", laterLists.get(uid).get(index).getMovieID()) + ":");
+                index++;
             }
             writer.close();
 
@@ -62,46 +121,49 @@ public class Main extends Application {
         }
     }
 
-    public void readHistoryLists() {
-        try {
-            String readLine = "";
-            FileReader reader = new FileReader("src\\main\\resources\\Files\\historylists.txt");
-            int c;
-            while ((c = reader.read()) != -1) {
-                readLine += (char) c;
-            }
-            reader.close();
-            String currentValue = new String();
+    // public void readHistoryLists() {
+    // try {
+    // String readLine = "";
+    // FileReader reader = new
+    // FileReader("src\\main\\resources\\Files\\historylists.txt");
+    // int c;
+    // while ((c = reader.read()) != -1) {
+    // readLine += (char) c;
+    // }
+    // reader.close();
+    // String currentValue = new String();
 
-            for (char character : readLine.toCharArray()) {
-                if (character != ':') {
-                    currentValue += character;
-                } else {
-                    String[] userIdAndMovies = currentValue.split("#");
-                    ArrayList<String> movieIdList = new ArrayList<>(Arrays.asList(userIdAndMovies[1].split(",")));
-                    historyLists.put(userIdAndMovies[0], movieIdList);
-                    currentValue = "";
-                    System.out.println("History List: " + historyLists.get(userIdAndMovies[0]));
-                }
-            }
+    // for (char character : readLine.toCharArray()) {
+    // if (character != ':') {
+    // currentValue += character;
+    // } else {
+    // String[] userIdAndMovies = currentValue.split("#");
+    // ArrayList<String> movieIdList = new
+    // ArrayList<>(Arrays.asList(userIdAndMovies[1].split(",")));
+    // historyLists.put(userIdAndMovies[0], movieIdList);
+    // currentValue = "";
+    // System.out.println("History List: " + historyLists.get(userIdAndMovies[0]));
+    // }
+    // }
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    // } catch (Exception e) {
+    // System.out.println(e.getMessage());
+    // }
+    // }
 
-    public void writeHistoryLists() {
-        try {
-            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\historylists.txt");
-            for (String uid : historyLists.keySet()) {
-                writer.write(uid + "#" + String.join(",", historyLists.get(uid)) + ":");
-            }
-            writer.close();
+    // public void writeHistoryLists() {
+    // try {
+    // FileWriter writer = new
+    // FileWriter("src\\main\\resources\\Files\\historylists.txt");
+    // for (String uid : historyLists.keySet()) {
+    // writer.write(uid + "#" + String.join(",", historyLists.get(uid)) + ":");
+    // }
+    // writer.close();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    // } catch (Exception e) {
+    // System.out.println(e.getMessage());
+    // }
+    // }
 
     public void readUsers() {
         try {
@@ -112,32 +174,40 @@ public class Main extends Application {
                 readLine += (char) c;
             }
             reader.close();
-            String userStringData[] = new String[6];
+            String userStringData[] = new String[10];
             int dataIndex = 0;
             for (int i = 0; i < readLine.length(); i++) {
+
                 int length = 0;
                 userStringData[dataIndex] = "";
                 String lengthSubsStr = readLine.substring(i, readLine.indexOf('#', i));
 
                 length = Integer.parseInt(lengthSubsStr);
                 i = readLine.indexOf('#', i);
+
                 for (int j = 1; j < length + 1; j++) {
                     userStringData[dataIndex] += readLine.charAt(i + j);
                 }
-                i += userStringData[dataIndex].length();
+                i += userStringData[dataIndex].length(); // PROBLEM HERE
                 dataIndex++;
-                if (dataIndex == 6) {
+                if (dataIndex == 7) {
                     dataIndex = 0;
                     User u = new User(userStringData[4], Integer.parseInt(userStringData[5]));
                     u.setFirst_name(userStringData[0]);
                     u.setLast_name(userStringData[1]);
                     u.setUser_email(userStringData[2]);
                     u.setUser_password(userStringData[3]);
-
+                    int day = Integer.parseInt(userStringData[6].substring(0, 2));
+                    int month = Integer.parseInt(userStringData[6].substring(2, 4));
+                    int year = Integer.parseInt(userStringData[6].substring(4));
+                    u.subscription.plan.StartDate = Calendar.getInstance();
+                    u.subscription.plan.StartDate.set(Calendar.YEAR, year);
+                    u.subscription.plan.StartDate.set(Calendar.MONTH, month);
+                    u.subscription.plan.StartDate.set(Calendar.DAY_OF_MONTH, day);
                     userData.add(u);
                     System.out.println( // For testing
                             "User: " + u.getFirst_name() + " " + u.getLast_name() + " " + u.getUser_email() + " "
-                                    + u.getUser_password() + " Subscription: " + u.subscription.PriceOfPlan + "$"
+                                    + u.getUser_password() + " Subscription: " + u.subscription.PriceOfPlan + "$ "
                                     + "     USERS NUM NOW: " + userData.size());
                 }
             }
@@ -368,12 +438,26 @@ public class Main extends Application {
         try {
             FileWriter writer = new FileWriter("src\\main\\resources\\Files\\users.txt");
             for (User u : userData) {
+                String date = "";
                 writer.write(u.getFirst_name().length() + "#" + u.getFirst_name());
                 writer.write(u.getLast_name().length() + "#" + u.getLast_name());
                 writer.write(u.getUser_email().length() + "#" + u.getUser_email());
                 writer.write(u.getUser_password().length() + "#" + u.getUser_password());
                 writer.write(u.getUser_ID().length() + "#" + u.getUser_ID());
                 writer.write(String.valueOf(u.subscription.PriceOfPlan).length() + "#" + u.subscription.PriceOfPlan);
+                writer.write("8#");
+                if (u.subscription.plan.StartDate.get(Calendar.DAY_OF_MONTH) < 10) {
+                    date += "0" + String.valueOf(u.subscription.plan.StartDate.get(Calendar.DAY_OF_MONTH));
+                } else {
+                    date += String.valueOf(u.subscription.plan.StartDate.get(Calendar.DAY_OF_MONTH));
+                }
+                if (u.subscription.plan.StartDate.get(Calendar.MONTH) < 10) {
+                    date += "0" + String.valueOf(u.subscription.plan.StartDate.get(Calendar.MONTH));
+                } else {
+                    date += String.valueOf(u.subscription.plan.StartDate.get(Calendar.MONTH));
+                }
+                date += String.valueOf(u.subscription.plan.StartDate.get(Calendar.YEAR));
+                writer.write(date);
             }
             writer.close();
 
@@ -389,7 +473,7 @@ public class Main extends Application {
         readDirectors();
         readMovies();
         readLaterLists();
-        readHistoryLists();
+        readWatchRecord();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
@@ -409,7 +493,7 @@ public class Main extends Application {
             writeDirectors();
             writeMovies();
             writeLaterLists();
-            writeHistoryLists();
+            writeWatchRecord();
         });
     }
 

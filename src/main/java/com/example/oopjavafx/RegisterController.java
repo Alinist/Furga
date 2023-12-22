@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -100,6 +101,8 @@ public class RegisterController implements Initializable {
             errorText.setText("Passwords doesn't match!");
         } else if (!Code.getText().equals(RandomCode.getText())) {
             errorText.setText("Incorrect Code!");
+        } else if(f_name.getText().equals("") || l_name.getText().equals("")) {
+            errorText.setText("Please fill all fields");
         } else {
             try {
                 boolean found = false;
@@ -119,10 +122,14 @@ public class RegisterController implements Initializable {
                 u.setLast_name(l_name.getText());
                 u.setUser_email(email.getText());
                 u.setUser_password(password.getText());
+                u.subscription.plan.StartDate = Calendar.getInstance();
+                u.subscription.plan.StartDate.set(Calendar.YEAR, 2023);
+                u.subscription.plan.StartDate.set(Calendar.MONTH, Calendar.JANUARY); // Note: Months are zero-based, so January is 0
+                u.subscription.plan.StartDate.set(Calendar.DAY_OF_MONTH, 1);
+                System.out.println(u.subscription.plan.StartDate.toString());
                 Main.userData.add(u);
-                
             } catch (Exception e) {
-                return;
+                System.out.println(e.getMessage());
             }
             loginController.email.setText(email.getText());
             loginController.errorText.setTextFill(Color.valueOf("#4dde90"));
@@ -136,5 +143,4 @@ public class RegisterController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RandomCode.setText(CodeGenerator());
     }
-    
 }

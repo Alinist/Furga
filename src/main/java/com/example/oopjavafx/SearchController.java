@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -81,27 +82,29 @@ public class SearchController implements Initializable {
     @FXML
     private AnchorPane pane2;
 
+    @FXML
+    private Label UserName;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
+
         SortByBox.getItems().addAll(sortbyItems);
         GenreBox.getItems().addAll(genreItems);
         TypeBox.getItems().addAll(typeItems);
         SortByBox.getSelectionModel().selectFirst();
         GenreBox.getSelectionModel().selectFirst();
         TypeBox.getSelectionModel().selectFirst();
-        ArrayList<Movie> movies = new ArrayList<>(Movies());
         ArrayList<Actor> actors = new ArrayList<>(Actors());
-////        for (int i = 0 ; i < movies.size() ; i++) {
-////
-////        }
-        for(int i = 0 ; i < movies.size() ; i++) {
+        for(int i = 0 ; i < User.MovieList.size() ; i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
 
             try {
                 HBox hbox = fxmlLoader.load();
                 SearchedMovieController searchedMovieController = fxmlLoader.getController();
+                searchedMovieController.setMovieData(User.MovieList.get(i));
                 MovieListLayout.getChildren().add(hbox);
 
             } catch (IOException e) {
@@ -110,11 +113,24 @@ public class SearchController implements Initializable {
         }
         for(int i = 0 ; i < actors.size() ; i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("Actor.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("Person.fxml"));
 
             try {
                 HBox hbox = fxmlLoader.load();
-                ActorController actorController = fxmlLoader.getController();
+                PersonController actorController = fxmlLoader.getController();
+                MovieListLayout.getChildren().add(hbox);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        for(int i = 0 ; i < actors.size() ; i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Person.fxml"));
+
+            try {
+                HBox hbox = fxmlLoader.load();
+                PersonController actorController = fxmlLoader.getController();
                 MovieListLayout.getChildren().add(hbox);
 
             } catch (IOException e) {
@@ -211,9 +227,11 @@ public class SearchController implements Initializable {
     }
 
     public void HomePage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+        root = loader.load();
+        HomePageController homePageController = loader.getController();
+        homePageController.UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
         ChangeScene(event);
-        stage.setResizable(true);
     }
 
     public void Later(ActionEvent event) throws IOException {

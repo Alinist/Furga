@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -26,10 +27,10 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class HomePageController implements Initializable {
-
     private boolean menuOpened = false;
 
     private boolean BlockingPaneExists = false;
@@ -69,7 +70,7 @@ public class HomePageController implements Initializable {
     private TextField SearchBar;
 
     @FXML
-    private Label UserName;
+    Label UserName;
 
     public void ChangeScene(ActionEvent event) {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -80,6 +81,23 @@ public class HomePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        User.MovieList = Main.moviesData;
+
+        for(int i = 0 ; i < User.MovieList.size() ; i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
+
+            try {
+                HBox hbox = fxmlLoader.load();
+                SearchedMovieController searchedMovieController = fxmlLoader.getController();
+                searchedMovieController.setMovieData(User.MovieList.get(i));
+                MovieListLayout.getChildren().add(hbox);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         ForYouButton.setStyle("-fx-text-fill:  #4dde90");
         TrendingButton.setStyle("-fx-text-fill:  #ffffff");
@@ -130,11 +148,12 @@ public class HomePageController implements Initializable {
                 translateTransition1.play();
             }
         });
+
     }
 
-    public void MakeImageRounded(ImageView im, String path){
+    public static void MakeImageRounded(ImageView im, String path){
 
-        Image myImage = new Image(getClass().getResourceAsStream(path));
+        Image myImage = new Image(HomePageController.class.getResourceAsStream(path));
         im.setImage(myImage);
 
         // set a clip to apply rounded border to the original image.
@@ -184,15 +203,16 @@ public class HomePageController implements Initializable {
     }
 
     public void WatchedList(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("WatchList.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("WatchList.fxml"));
+        root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);
     }
 
     public void Later(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Later.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Later.fxml"));
+        root = loader.load();
         ChangeScene(event);
-        stage.setResizable(true);
         stage.setResizable(true);
     }
     public void Search(ActionEvent event) throws IOException {
@@ -202,11 +222,16 @@ public class HomePageController implements Initializable {
         searchController.SearchBar.setText(SearchBar.getText());
         ChangeScene(event);
         stage.setResizable(true);
-        stage.setResizable(true);
     }
 
     public void Subscription(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        Calendar calendar = Calendar.getInstance();
+        FXMLLoader loader;
+        if(Main.CurrentUser.subscription.CheckIfSubscriptionEnding(calendar)) {
+            loader = new FXMLLoader(getClass().getResource("My_Subscription.fxml"));
+        } else {
+            loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        }
         root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);

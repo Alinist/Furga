@@ -128,6 +128,8 @@ public class MovieSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
+
         pane1.setVisible(false);
 
         FadeTransition fadeTransition=new FadeTransition(Duration.seconds(0.25),pane1);
@@ -391,11 +393,6 @@ public class MovieSceneController implements Initializable {
         // store the rounded image in the imageView.
         im.setImage(image);
     }
-    public void HomePage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-        ChangeScene(event);
-        stage.setResizable(true);
-    }
 
     public void SetRating (ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -495,5 +492,12 @@ public class MovieSceneController implements Initializable {
         root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);
+    }
+    public void HomePage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+        root = loader.load();
+        HomePageController homePageController = loader.getController();
+        homePageController.UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
+        ChangeScene(event);
     }
 }

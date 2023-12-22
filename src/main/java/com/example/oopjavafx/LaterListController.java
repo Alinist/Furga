@@ -66,10 +66,12 @@ public class LaterListController implements Initializable{
     private AnchorPane pane2;
 
     @FXML
-    private Label UserName;
+    Label UserName;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
+
         ArrayList<Movie> movies = new ArrayList<>(Movies());
 ////        for (int i = 0 ; i < movies.size() ; i++) {
 ////
@@ -159,9 +161,11 @@ public class LaterListController implements Initializable{
     }
 
     public void HomePage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+        root = loader.load();
+        HomePageController homePageController = loader.getController();
+        homePageController.UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
         ChangeScene(event);
-        stage.setResizable(true);
     }
 
     public void Later(ActionEvent event) throws IOException {

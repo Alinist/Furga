@@ -56,7 +56,7 @@ public class Subscription {
             plan.setTypeOfPlan("Basic");
             countBasic++;
         }
-        else if(PriceOfPlan ==  15)
+        else if(PriceOfPlan ==  20)
         {
             plan.setTypeOfPlan("Standard");
             countStandard++;
@@ -83,7 +83,7 @@ public class Subscription {
             int SECONDS_IN_A_DAY = 24 * 60 * 60;
             long diff =  today.getTimeInMillis() - plan.StartDate.getTimeInMillis();
             long diffSec = diff / 1000;
-            long days = diffSec / SECONDS_IN_A_DAY;
+            long days = (diffSec / SECONDS_IN_A_DAY) + 30;
 
 
             if( plan.numberOfMovies==0 || days == 0)

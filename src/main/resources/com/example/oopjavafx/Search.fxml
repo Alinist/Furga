@@ -57,17 +57,17 @@
       <AnchorPane fx:id="pane1" prefHeight="1080.0" prefWidth="1392.0" style="-fx-background-color: #2d2d2d;" />
       <AnchorPane id="menu" fx:id="pane2" layoutX="1392.0" layoutY="2.0" prefHeight="1080.0" prefWidth="537.0" style="-fx-background-color: #000000;" stylesheets="@WatchList.css">
          <children>
-            <JFXButton focusTraversable="false" layoutX="70.0" layoutY="471.0" onAction="#WatchedList" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Watched List" textFill="WHITE">
+            <JFXButton focusTraversable="false" layoutX="70.0" layoutY="558.0" onAction="#WatchedList" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Watched List" textFill="WHITE">
                <font>
                   <Font name="Fredoka Bold" size="44.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="Later" focusTraversable="false" layoutX="70.0" layoutY="621.0" onAction="#Later" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Later List" textFill="WHITE">
+            <JFXButton fx:id="Later" focusTraversable="false" layoutX="70.0" layoutY="708.0" onAction="#Later" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Later List" textFill="WHITE">
                <font>
                   <Font name="Fredoka Bold" size="44.0" />
                </font>
             </JFXButton>
-            <JFXButton id="logout" fx:id="Logout" focusTraversable="false" layoutX="70.0" layoutY="771.0" onAction="#Logout" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Log out" textFill="WHITE">
+            <JFXButton id="logout" fx:id="Logout" focusTraversable="false" layoutX="70.0" layoutY="858.0" onAction="#Logout" prefHeight="112.0" prefWidth="405.0" ripplerFill="#ffffff00" styleClass="Subscription" stylesheets="@Style.css" text="Log out" textFill="WHITE">
                <font>
                   <Font name="Fredoka Bold" size="44.0" />
                </font>
@@ -77,6 +77,11 @@
                   <Image url="@Images/icons8-person-96.png" />
                </image>
             </ImageView>
+            <Label fx:id="UserName" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="413.0" prefHeight="85.0" prefWidth="517.0" style="-fx-text-fill: white;" text="Firstname + Lastname" textFill="WHITE" textOverrun="CLIP" wrapText="true">
+               <font>
+                  <Font name="Fredoka Bold" size="50.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

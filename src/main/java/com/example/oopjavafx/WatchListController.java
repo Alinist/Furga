@@ -34,6 +34,8 @@ public class WatchListController implements Initializable{
     private Stage stage;
     private Parent root;
 
+    ArrayList<Movie> movies = new ArrayList<>(Movies());
+
     public void ChangeScene(ActionEvent event) {
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene1 = new Scene(root);
@@ -66,11 +68,12 @@ public class WatchListController implements Initializable{
     private AnchorPane pane2;
 
     @FXML
-    private Label UserName;
+    Label UserName;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ArrayList<Movie> movies = new ArrayList<>(Movies());
+        UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
+
         for(int i = 0 ; i < movies.size() ; i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("WatchedMovie.fxml"));
@@ -156,9 +159,11 @@ public class WatchListController implements Initializable{
     }
 
     public void HomePage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+        root = loader.load();
+        HomePageController homePageController = loader.getController();
+        homePageController.UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
         ChangeScene(event);
-        stage.setResizable(true);
     }
 
     public void Later(ActionEvent event) throws IOException {

@@ -64,7 +64,7 @@
                   </Label>
                </children>
             </Group>
-            <JFXButton focusTraversable="false" layoutX="68.0" layoutY="488.0" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" style="-fx-background-color: #4dde90;" styleClass="Subscription" stylesheets="@Style.css" text="Subscribe">
+            <JFXButton focusTraversable="false" layoutX="68.0" layoutY="488.0" onAction="#subscribeToBasic" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" style="-fx-background-color: #4dde90;" styleClass="Subscription" stylesheets="@Style.css" text="Subscribe">
                <font>
                   <Font name="Fredoka Bold" size="37.0" />
                </font>
@@ -106,7 +106,7 @@
                   </Label>
                </children>
             </Group>
-            <JFXButton focusTraversable="false" layoutX="68.0" layoutY="488.0" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" style="-fx-background-color: #4dde90;" styleClass="Subscription" stylesheets="@Style.css" text="Subscribe">
+            <JFXButton focusTraversable="false" layoutX="68.0" layoutY="488.0" onAction="#subscribeToStandard" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" style="-fx-background-color: #4dde90;" styleClass="Subscription" stylesheets="@Style.css" text="Subscribe">
                <font>
                   <Font name="Fredoka Bold" size="37.0" />
                </font>
@@ -136,7 +136,7 @@
             </Group>
             <Group id="The money part" layoutX="-25.0" layoutY="258.0">
                <children>
-                  <Label focusTraversable="false" layoutX="72.0" layoutY="1.0" prefHeight="169.0" prefWidth="374.0" text="Up to:&#10;20 movies/month&#10;" textFill="WHITE">
+                  <Label focusTraversable="false" layoutX="72.0" layoutY="1.0" prefHeight="169.0" prefWidth="374.0" text="Up to:&#10;30 movies/month&#10;" textFill="WHITE">
                      <font>
                         <Font name="Fredoka Bold" size="44.0" />
                      </font>
@@ -148,13 +148,38 @@
                   </Label>
                </children>
             </Group>
-            <JFXButton focusTraversable="false" layoutX="68.0" layoutY="488.0" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" style="-fx-background-color: #4dde90;" styleClass="Subscription" stylesheets="@Style.css" text="Subscribe">
+            <JFXButton focusTraversable="false" layoutX="68.0" layoutY="488.0" onAction="#subscribeToPremium" prefHeight="80.0" prefWidth="307.0" ripplerFill="#ffffff00" style="-fx-background-color: #4dde90;" styleClass="Subscription" stylesheets="@Style.css" text="Subscribe">
                <font>
                   <Font name="Fredoka Bold" size="37.0" />
                </font>
             </JFXButton>
          </children>
       </AnchorPane>
+      <Label id="User fname" fx:id="fName" disable="true" focusTraversable="false" layoutX="364.0" layoutY="10.0" prefHeight="86.0" prefWidth="929.0" text="first name of the user" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Fredoka Bold" size="55.0" />
+         </font>
+      </Label>
+      <Label id="User Lname" fx:id="lName" disable="true" focusTraversable="false" layoutX="361.0" layoutY="10.0" prefHeight="86.0" prefWidth="929.0" text="Last name of the user" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Fredoka Bold" size="55.0" />
+         </font>
+      </Label>
+      <Label id="his subscription" fx:id="subscription" alignment="CENTER" disable="true" focusTraversable="false" layoutX="644.0" layoutY="10.0" prefHeight="86.0" prefWidth="429.0" text="his subscription" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Fredoka Bold" size="55.0" />
+         </font>
+      </Label>
+      <Label id="number of wathed" fx:id="NoOfWatchedMovies" alignment="CENTER" disable="true" focusTraversable="false" layoutX="508.0" layoutY="10.0" prefHeight="86.0" prefWidth="103.0" text="No" textFill="#4dde90" visible="false">
+         <font>
+            <Font name="Fredoka Bold" size="64.0" />
+         </font>
+      </Label>
+      <Label id="max number of watched" fx:id="MaxNoOfMovies" alignment="CENTER" disable="true" focusTraversable="false" layoutX="982.0" layoutY="10.0" prefHeight="86.0" prefWidth="79.0" text="No" textFill="#4dde90" visible="false">
+         <font>
+            <Font name="Fredoka Bold" size="64.0" />
+         </font>
+      </Label>
       <AnchorPane fx:id="pane1" prefHeight="1080.0" prefWidth="1392.0" style="-fx-background-color: #2d2d2d;" />
       <AnchorPane id="menu" fx:id="pane2" layoutX="1392.0" layoutY="2.0" prefHeight="1080.0" prefWidth="537.0" style="-fx-background-color: #000000;" stylesheets="@WatchList.css">
          <children>

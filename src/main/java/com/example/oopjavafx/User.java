@@ -15,6 +15,9 @@ public class User {
     public ArrayList<Watch_Record> Watched = new ArrayList<>();
     private HashMap MoviesStatues = new HashMap();
 
+    public void setWatched(ArrayList<Watch_Record> watched) {
+        Watched = watched;
+    }
 
     private ArrayList<Movie> Later = new ArrayList<Movie>();
     public Subscription subscription = new Subscription();
@@ -37,6 +40,15 @@ public class User {
         subscription.setPriceOfPlan(subPrice);
     }
 
+    public static User getUserById(String uid) {
+        for (User u : Main.userData) {
+            if (u.getUser_ID().equals(uid)) {
+                return u;
+            }
+        }
+        return null;
+    }
+
     /********************** Methods**********************/
 
     public String getUser_ID() {
@@ -49,9 +61,7 @@ public class User {
 
 
     /////////////////Custom Methods
- public void setWatched(ArrayList<Watch_Record> watched) {
-        Watched = watched;
-    }
+
 
     /////////////////Certain User
     public void SetUserRatingForMovie(Movie movie,int rating) { //the movie must be on the watched list first (rating is not from the user but from the site)
@@ -324,10 +334,32 @@ public class User {
     /////////////////Watched list
 
     public void addMovieToWatched(Watch_Record watchRecord) {
-        watchRecord.getMovie().watchcount++;
-        MoviesStatues.put(watchRecord.getMovie(), true);
-        Later.remove(watchRecord.getMovie());
-        Watched.add(watchRecord);
+        boolean Is_Added_Before_InWatched = false;
+        for (int i = 0; i < Watched.size(); i++) {
+            if (Watched.get(i).getMovie().getMovieTitle().toLowerCase().equals(watchRecord.getMovie().getMovieTitle().toLowerCase())){
+                Is_Added_Before_InWatched = true;
+                break;
+            }
+        }
+
+        if (!Is_Added_Before_InWatched){
+            Calendar today = Calendar.getInstance();
+            if (subscription.plan.numberOfMovies == 2){ //can be done in main gui will be better
+                subscription.Warring();
+            }
+            if (subscription.plan.numberOfMovies >0 && subscription.CheckIfSubscriptionEnding(today)){
+                subscription.plan.numberOfMovies--;
+                MoviesStatues.put(watchRecord.getMovie(), true);
+                Later.remove(watchRecord.getMovie());
+                Watched.add(watchRecord);
+            }
+            else
+            {
+                subscription.CheckIfSubscriptionEnding(today);
+
+            }
+            watchRecord.getMovie().watchcount++;
+        }
     }
     public void getWatched() {
         System.out.println("Watched Movie List : ");

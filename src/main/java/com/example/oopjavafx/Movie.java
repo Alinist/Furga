@@ -89,6 +89,15 @@ public class Movie {
         this.revenue = revenue;
     }
 
+    public static Movie getMovieById(String mid) {
+        for (Movie m : Main.moviesData) {
+            if (m.getMovieID().equals(mid)) {
+                return m;
+            }
+        }
+        return null;
+    }
+
     /////////////////////////////////////////////// Setters and
     /////////////////////////////////////////////// Getters//////////////////////////////////////////////////
     public void setCast(ArrayList<Actor> cast) {
@@ -108,139 +117,139 @@ public class Movie {
         director = d;
     }
 
-    public void writeMovieToFile(Movie movie) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(MOVIES_FILE_PATH, true))) {
-            writer.write("ID: " + movie.getMovieID());
-            writer.newLine();
-            writer.write("Title: " + movie.getMovieTitle());
-            writer.newLine();
-            writer.write("Released date: " + movie.getReleaseDate());
-            writer.newLine();
-            writer.write("Duration: " + movie.getRunningTime());
-            writer.newLine();
-            writer.write("IMDB score: " + movie.getImdb_score());
-            writer.newLine();
-            writer.write("Country: " + movie.getCountry());
-            writer.newLine();
-            writer.write("Budget: " + movie.getBudget());
-            writer.newLine();
-            writer.write("BoxOffice: " + movie.getRevenue());
-            writer.newLine();
-            writer.newLine(); // Add an extra newline to separate movie entries
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void extractMovieInfo(String movieTitle, String infoKey) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(MOVIES_FILE_PATH))) {
-            String line;
-            boolean movieFound = false;
-            boolean infoFound = false;
-
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Title:") && line.substring(7).trim().equalsIgnoreCase(movieTitle)) {
-                    movieFound = true;
-                }
-
-                if (movieFound) {
-                    if (line.startsWith(infoKey + ":")) {
-                        String infoValue = line.substring(infoKey.length() + 1).trim();
-                        System.out.println(infoValue);
-                        infoFound = true;
-                        break;
-                    }
-                }
-
-                if (line.isEmpty()) {
-                    movieFound = false;
-                }
-            }
-
-            if (!infoFound) {
-                System.out.println("Info not found");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void extractDirectorInfo(String firstName, String lastName, String infoKey) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(DIRECTORS_FILE_PATH))) {
-            String line;
-            boolean directorFound = false;
-            boolean infoFound = false;
-
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Firstname:") && line.substring(10).trim().equalsIgnoreCase(firstName)) {
-                    // Check the next line for the last name
-                    String nextLine = reader.readLine();
-                    if (nextLine != null && nextLine.startsWith("Lastname:")
-                            && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
-                        directorFound = true;
-                    }
-                }
-
-                if (directorFound) {
-                    if (line.startsWith(infoKey + ":")) {
-                        String infoValue = line.substring(infoKey.length() + 1).trim();
-                        System.out.println(infoValue);
-                        infoFound = true;
-                        break;
-                    }
-                }
-
-                if (line.isEmpty()) {
-                    directorFound = false;
-                }
-            }
-
-            if (!infoFound) {
-                System.out.println("Info not found");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    // Other class methods
-
-    public void extractActorInfo(String firstName, String lastName, String infoKey) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(ACTORS_FILE_PATH))) {
-            String line;
-            boolean actorFound = false;
-            boolean infoFound = false;
-
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Firstname:") && line.substring(10).trim().equalsIgnoreCase(firstName)) {
-                    // Check the next line for the last name
-                    String nextLine = reader.readLine();
-                    if (nextLine != null && nextLine.startsWith("Lastname:")
-                            && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
-                        actorFound = true;
-                    }
-                }
-
-                if (actorFound) {
-                    if (line.startsWith(infoKey + ":")) {
-                        String infoValue = line.substring(infoKey.length() + 1).trim();
-                        System.out.println(infoValue);
-                        infoFound = true;
-                        break;
-                    }
-                }
-
-                if (line.isEmpty()) {
-                    actorFound = false;
-                }
-            }
-
-            if (!infoFound) {
-                System.out.println("Info not found");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public void writeMovieToFile(Movie movie) {
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(MOVIES_FILE_PATH, true))) {
+//            writer.write("ID: " + movie.getMovieID());
+//            writer.newLine();
+//            writer.write("Title: " + movie.getMovieTitle());
+//            writer.newLine();
+//            writer.write("Released date: " + movie.getReleaseDate());
+//            writer.newLine();
+//            writer.write("Duration: " + movie.getRunningTime());
+//            writer.newLine();
+//            writer.write("IMDB score: " + movie.getImdb_score());
+//            writer.newLine();
+//            writer.write("Country: " + movie.getCountry());
+//            writer.newLine();
+//            writer.write("Budget: " + movie.getBudget());
+//            writer.newLine();
+//            writer.write("BoxOffice: " + movie.getRevenue());
+//            writer.newLine();
+//            writer.newLine(); // Add an extra newline to separate movie entries
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public void extractMovieInfo(String movieTitle, String infoKey) {
+//        try (BufferedReader reader = new BufferedReader(new FileReader(MOVIES_FILE_PATH))) {
+//            String line;
+//            boolean movieFound = false;
+//            boolean infoFound = false;
+//
+//            while ((line = reader.readLine()) != null) {
+//                if (line.startsWith("Title:") && line.substring(7).trim().equalsIgnoreCase(movieTitle)) {
+//                    movieFound = true;
+//                }
+//
+//                if (movieFound) {
+//                    if (line.startsWith(infoKey + ":")) {
+//                        String infoValue = line.substring(infoKey.length() + 1).trim();
+//                        System.out.println(infoValue);
+//                        infoFound = true;
+//                        break;
+//                    }
+//                }
+//
+//                if (line.isEmpty()) {
+//                    movieFound = false;
+//                }
+//            }
+//
+//            if (!infoFound) {
+//                System.out.println("Info not found");
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public void extractDirectorInfo(String firstName, String lastName, String infoKey) {
+//        try (BufferedReader reader = new BufferedReader(new FileReader(DIRECTORS_FILE_PATH))) {
+//            String line;
+//            boolean directorFound = false;
+//            boolean infoFound = false;
+//
+//            while ((line = reader.readLine()) != null) {
+//                if (line.startsWith("Firstname:") && line.substring(10).trim().equalsIgnoreCase(firstName)) {
+//                    // Check the next line for the last name
+//                    String nextLine = reader.readLine();
+//                    if (nextLine != null && nextLine.startsWith("Lastname:")
+//                            && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
+//                        directorFound = true;
+//                    }
+//                }
+//
+//                if (directorFound) {
+//                    if (line.startsWith(infoKey + ":")) {
+//                        String infoValue = line.substring(infoKey.length() + 1).trim();
+//                        System.out.println(infoValue);
+//                        infoFound = true;
+//                        break;
+//                    }
+//                }
+//
+//                if (line.isEmpty()) {
+//                    directorFound = false;
+//                }
+//            }
+//
+//            if (!infoFound) {
+//                System.out.println("Info not found");
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//    // Other class methods
+//
+//    public void extractActorInfo(String firstName, String lastName, String infoKey) {
+//        try (BufferedReader reader = new BufferedReader(new FileReader(ACTORS_FILE_PATH))) {
+//            String line;
+//            boolean actorFound = false;
+//            boolean infoFound = false;
+//
+//            while ((line = reader.readLine()) != null) {
+//                if (line.startsWith("Firstname:") && line.substring(10).trim().equalsIgnoreCase(firstName)) {
+//                    // Check the next line for the last name
+//                    String nextLine = reader.readLine();
+//                    if (nextLine != null && nextLine.startsWith("Lastname:")
+//                            && nextLine.substring(9).trim().equalsIgnoreCase(lastName)) {
+//                        actorFound = true;
+//                    }
+//                }
+//
+//                if (actorFound) {
+//                    if (line.startsWith(infoKey + ":")) {
+//                        String infoValue = line.substring(infoKey.length() + 1).trim();
+//                        System.out.println(infoValue);
+//                        infoFound = true;
+//                        break;
+//                    }
+//                }
+//
+//                if (line.isEmpty()) {
+//                    actorFound = false;
+//                }
+//            }
+//
+//            if (!infoFound) {
+//                System.out.println("Info not found");
+//            }
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     // Other class methods
 
