@@ -65,48 +65,8 @@ public class LoginController implements Initializable {
             errorText.setText("Invalid inputs !! Try again");
         }
         try {
-            String readLine = "";
-            FileReader reader = new FileReader("src\\main\\resources\\Files\\users.txt");
-            int c;
-            while ((c = reader.read()) != -1) {
-                readLine += (char) c;
-            }
-            reader.close();
-            String fnameReadText = "", lnameReadText = "", emailReadText = "", pwReadText = "";
-            String userStringData[] = { fnameReadText, lnameReadText, emailReadText, pwReadText };
-            ArrayList<User> userData = new ArrayList<User>();
-            int dataIndex = 0;
-            for (int i = 0; i < readLine.length(); i++) {
-                int length = 0;
-                userStringData[dataIndex] = "";
-                String lengthSubsStr = readLine.substring(i, readLine.indexOf('#', i));
-                System.out.println("STRING: " + lengthSubsStr);
-                System.out.println(i);
-
-                length = Integer.parseInt(lengthSubsStr);
-                System.out.println(length);
-                i = readLine.indexOf('#', i);
-                for (int j = 1; j < length + 1; j++) {
-                    userStringData[dataIndex] += readLine.charAt(i + j);
-                }
-                i += userStringData[dataIndex].length();
-                System.out.println(userStringData[dataIndex]); // For testing
-                dataIndex++;
-                if (dataIndex == 4) {
-                    dataIndex = 0;
-                    User u = new User();
-                    u.setFirst_name(userStringData[0]);
-                    u.setLast_name(userStringData[1]);
-                    u.setUser_email(userStringData[2]);
-                    u.setUser_password(userStringData[3]);
-                    userData.add(u);
-                    System.out.println( // For testing
-                            "User: " + u.getFirst_name() + " " + u.getLast_name() + " " + u.getUser_email() + " "
-                                    + u.getUser_password());
-                }
-            }
             boolean found = false;
-            for (User u : userData) {
+            for (User u : Main.userData) {
                 if (u.getUser_password().equals(password.getText()) && u.getUser_email().equals(email.getText())) {
                     found = true;
                     errorText.setTextFill(Color.valueOf("#4dde90"));
