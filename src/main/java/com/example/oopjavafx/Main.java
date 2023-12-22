@@ -10,12 +10,98 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Main extends Application {
     public static ArrayList<Movie> moviesData = new ArrayList<Movie>();
     public static ArrayList<Actor> actorsData = new ArrayList<Actor>();
     public static ArrayList<Director> directorData = new ArrayList<Director>();
     public static ArrayList<User> userData = new ArrayList<User>();
+    HashMap<String, ArrayList<String>> laterLists = new HashMap<>();
+    HashMap<String, ArrayList<String>> historyLists = new HashMap<>();
+
+    public void readLaterLists() {
+        try {
+            String readLine = "";
+            FileReader reader = new FileReader("src\\main\\resources\\Files\\laterlists.txt");
+            int c;
+            while ((c = reader.read()) != -1) {
+                readLine += (char) c;
+            }
+            reader.close();
+            String currentValue = new String();
+
+            for (char character : readLine.toCharArray()) {
+                if (character != ':') {
+                    currentValue += character;
+                } else {
+                    String[] userIdAndMovies = currentValue.split("#");
+                    ArrayList<String> movieIdList = new ArrayList<>(Arrays.asList(userIdAndMovies[1].split(",")));
+                    laterLists.put(userIdAndMovies[0], movieIdList);
+                    currentValue = "";
+                    System.out.println("Later List: " + laterLists.get(userIdAndMovies[0]));
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeLaterLists() {
+        try {
+            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\laterlists.txt");
+            for (String uid : laterLists.keySet()) {
+                writer.write(uid + "#" + String.join(",", laterLists.get(uid)) + ":");
+            }
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void readHistoryLists() {
+        try {
+            String readLine = "";
+            FileReader reader = new FileReader("src\\main\\resources\\Files\\historylists.txt");
+            int c;
+            while ((c = reader.read()) != -1) {
+                readLine += (char) c;
+            }
+            reader.close();
+            String currentValue = new String();
+
+            for (char character : readLine.toCharArray()) {
+                if (character != ':') {
+                    currentValue += character;
+                } else {
+                    String[] userIdAndMovies = currentValue.split("#");
+                    ArrayList<String> movieIdList = new ArrayList<>(Arrays.asList(userIdAndMovies[1].split(",")));
+                    historyLists.put(userIdAndMovies[0], movieIdList);
+                    currentValue = "";
+                    System.out.println("History List: " + historyLists.get(userIdAndMovies[0]));
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void writeHistoryLists() {
+        try {
+            FileWriter writer = new FileWriter("src\\main\\resources\\Files\\historylists.txt");
+            for (String uid : historyLists.keySet()) {
+                writer.write(uid + "#" + String.join(",", historyLists.get(uid)) + ":");
+            }
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void readUsers() {
         try {
@@ -26,8 +112,7 @@ public class Main extends Application {
                 readLine += (char) c;
             }
             reader.close();
-            String fnameReadText = "", lnameReadText = "", emailReadText = "", pwReadText = "";
-            String userStringData[] = { fnameReadText, lnameReadText, emailReadText, pwReadText };
+            String userStringData[] = new String[6];
             int dataIndex = 0;
             for (int i = 0; i < readLine.length(); i++) {
                 int length = 0;
@@ -41,17 +126,19 @@ public class Main extends Application {
                 }
                 i += userStringData[dataIndex].length();
                 dataIndex++;
-                if (dataIndex == 4) {
+                if (dataIndex == 6) {
                     dataIndex = 0;
-                    User u = new User();
+                    User u = new User(userStringData[4], Integer.parseInt(userStringData[5]));
                     u.setFirst_name(userStringData[0]);
                     u.setLast_name(userStringData[1]);
                     u.setUser_email(userStringData[2]);
                     u.setUser_password(userStringData[3]);
+
                     userData.add(u);
                     System.out.println( // For testing
                             "User: " + u.getFirst_name() + " " + u.getLast_name() + " " + u.getUser_email() + " "
-                                    + u.getUser_password() + "     USERS NUM NOW: " + userData.size());
+                                    + u.getUser_password() + " Subscription: " + u.subscription.PriceOfPlan + "$"
+                                    + "     USERS NUM NOW: " + userData.size());
                 }
             }
         } catch (Exception e) {
@@ -197,8 +284,8 @@ public class Main extends Application {
                 i += movieStringData[dataIndex].length();
                 // System.out.println(movieStringData[dataIndex]); // For testing
                 dataIndex++;
-                if (dataIndex == 7) {
-                    Movie m = new Movie();
+                if (dataIndex == 8) {
+                    Movie m = new Movie(movieStringData[7]);
                     dataIndex++;
                     Person p = new Director("", "", "", "", 0, null, null);
                     for (Director d : directorData) {
@@ -237,7 +324,8 @@ public class Main extends Application {
                     System.out.println( // For testing
                             "Movie: " + m.getMovieTitle() + " " + m.getReleaseDate() + " " +
                                     m.director.getFirst_name() + " " + m.director.getLast_name() + " "
-                                    + m.Language + " " + m.getRunningTime() + "min. " + "     MOVIES NUM NOW: "
+                                    + m.Language + " " + m.getRunningTime() + "min. " + m.getMovieID()
+                                    + "      MOVIES NUM NOW: "
                                     + moviesData.size());
                     for (Actor a : m.Cast) {
                         System.out.println(a.first_name + " " + a.last_name);
@@ -262,10 +350,12 @@ public class Main extends Application {
                         + Arrays.stream(m.getGenres()).collect(Collectors.joining("/")));
                 writer.write(m.Language.length() + "#" + m.Language);
                 writer.write(String.valueOf(m.getRunningTime()).length() + "#" + m.getRunningTime());
+                writer.write(m.getMovieID().length() + "#" + m.getMovieID());
                 for (Actor a : m.Cast) {
                     castString += ("-" + a.getFirst_name() + " " + a.getLast_name());
                 }
                 writer.write(castString.length() + "$" + castString);
+                castString = "";
             }
             writer.close();
 
@@ -282,6 +372,8 @@ public class Main extends Application {
                 writer.write(u.getLast_name().length() + "#" + u.getLast_name());
                 writer.write(u.getUser_email().length() + "#" + u.getUser_email());
                 writer.write(u.getUser_password().length() + "#" + u.getUser_password());
+                writer.write(u.getUser_ID().length() + "#" + u.getUser_ID());
+                writer.write(String.valueOf(u.subscription.PriceOfPlan).length() + "#" + u.subscription.PriceOfPlan);
             }
             writer.close();
 
@@ -296,6 +388,8 @@ public class Main extends Application {
         readActors();
         readDirectors();
         readMovies();
+        readLaterLists();
+        readHistoryLists();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
@@ -314,6 +408,8 @@ public class Main extends Application {
             writeActors();
             writeDirectors();
             writeMovies();
+            writeLaterLists();
+            writeHistoryLists();
         });
     }
 

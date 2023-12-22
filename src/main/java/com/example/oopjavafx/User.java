@@ -2,9 +2,8 @@ package com.example.oopjavafx;
 
 import java.util.*;
 
-
 public class User {
-    ////////////////////////////////////Fields/////////////////////////////////////////////////////////
+    //////////////////////////////////// Fields/////////////////////////////////////////////////////////
     protected final String User_ID;
     protected boolean suspended = false;
     protected boolean loggedIn = false;
@@ -24,41 +23,45 @@ public class User {
     protected String user_password;
     protected String theme_preference;
 
-
-    /********************** Constructor**********************/
+    /********************** Constructor **********************/
 
     public User() {
         this.User_ID = UUID.randomUUID().toString();// generate unique id for each user
         subscription.setPriceOfPlan(0);
     }
 
-    /********************** Methods**********************/
+    public User(String userID, int subPrice) {
+        this.User_ID = userID;
+        subscription.setPriceOfPlan(subPrice);
+    }
+
+    /********************** Methods **********************/
 
     public String getUser_ID() {
         return User_ID;
     }
+
     public HashMap getUserRatingsForMovie() {
         return MoviesRatings;
     }
+
     public boolean getSuspendedValue() {
         return suspended;
     }
 
+    ///////////////// Custom Methods
 
-    /////////////////Custom Methods
-
-
-    /////////////////Certain User
-    public void SetUserRatingForMovie(Movie movie,int rating) { //the movie must be on the watched list first (rating is not from the user but from the site)
+    ///////////////// Certain User
+    public void SetUserRatingForMovie(Movie movie, int rating) { // the movie must be on the watched list first (rating
+                                                                 // is not from the user but from the site)
         if (MoviesStatues.get(movie) == null || (boolean) MoviesStatues.get(movie)) {
             for (int i = 0; i < Watched.size(); i++) {
                 if (movie.getMovieTitle().equalsIgnoreCase(Watched.get(i).getMovieTitle())) {
-                    if (rating <= 10 && rating >= 0){
-                        MoviesRatings.put(movie,rating);
-                        Watched.get(i).Ratings.add((float)rating);
-                    }
-                    else {
-                        MoviesRatings.put(movie,0);
+                    if (rating <= 10 && rating >= 0) {
+                        MoviesRatings.put(movie, rating);
+                        Watched.get(i).Ratings.add((float) rating);
+                    } else {
+                        MoviesRatings.put(movie, 0);
                         Watched.get(i).Ratings.add(0f);
                     }
                 }
@@ -71,144 +74,146 @@ public class User {
 
     public void displayUserRatingsForMovie() {
         System.out.println("Watched Movie List : ");
-        if(Watched.isEmpty()) {
+        if (Watched.isEmpty()) {
             System.out.println("No Movies Available");
         } else {
             for (int i = 0; i < Watched.size(); i++) {
-                System.out.println(i + 1 + ") " + Watched.get(i).getMovieTitle() + " " + MoviesRatings.get(Watched.get(i)));
+                System.out.println(
+                        i + 1 + ") " + Watched.get(i).getMovieTitle() + " " + MoviesRatings.get(Watched.get(i)));
             }
         }
     }
 
-    public void GetMovieStatusForUser(Movie movie){
+    public void GetMovieStatusForUser(Movie movie) {
         String movie_status;
-        if ((boolean)MoviesStatues.get(movie)){ // m4 3arfen 2zai by4t8l bs 3la allah XDD
+        if ((boolean) MoviesStatues.get(movie)) { // m4 3arfen 2zai by4t8l bs 3la allah XDD
             movie_status = "Watched";
-        }
-        else{
+        } else {
             movie_status = "Not Watched";
         }
         for (int i = 0; i < MovieList.size(); i++) {
-            if (MovieList.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
-                System.out.println(MovieList.get(i).getMovieTitle()+"  "+movie_status);
+            if (MovieList.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())) {
+                System.out.println(MovieList.get(i).getMovieTitle() + "  " + movie_status);
             }
         }
     }
 
     /********************** START OF needed to be tested *************************/
-/////////////////All User
-    public static void GetRecentMovies(int max_recent_movies_want_to_appear) { // ne5tar limit li 3adad el haiezharo fi el recent
+    ///////////////// All User
+    public static void GetRecentMovies(int max_recent_movies_want_to_appear) { // ne5tar limit li 3adad el haiezharo fi
+                                                                               // el recent
         int index = 1;
-        for (int i = MovieList.size()-1; i >= 0; i--) {
-            if (i>((MovieList.size()-1)-max_recent_movies_want_to_appear)){
-                System.out.println(index++ + ") " +MovieList.get(i).getMovieTitle());
+        for (int i = MovieList.size() - 1; i >= 0; i--) {
+            if (i > ((MovieList.size() - 1) - max_recent_movies_want_to_appear)) {
+                System.out.println(index++ + ") " + MovieList.get(i).getMovieTitle());
             }
         }
     }
 
-    public static void GetTopRatedMovies(){
-        ArrayList <Movie> sortedMoviesRating  = new ArrayList<Movie>();
+    public static void GetTopRatedMovies() {
+        ArrayList<Movie> sortedMoviesRating = new ArrayList<Movie>();
         for (int i = 0; i < MovieList.size(); i++) {
             sortedMoviesRating.add(MovieList.get(i));
         }
         Collections.sort(sortedMoviesRating, new Comparator<Movie>() {
 
             public int compare(Movie o1, Movie o2) {
-                if (o1.imdb_score<o2.imdb_score) {
+                if (o1.imdb_score < o2.imdb_score) {
                     return 1;
-                }
-                else if (o1.imdb_score>o2.imdb_score) {
+                } else if (o1.imdb_score > o2.imdb_score) {
                     return -1;
 
-                }
-                else
-                {
+                } else {
                     return 0;
                 }
             }
         });
 
         for (int i = 0; i < sortedMoviesRating.size(); i++) {
-            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).getImdb_score());
+            System.out.println((i + 1) + ") " + sortedMoviesRating.get(i).getMovieTitle() + " "
+                    + sortedMoviesRating.get(i).getImdb_score());
         }
 
     }
 
-    public static void GetTopWatchedMovies(){
-        ArrayList <Movie> sortedMoviesRating  = new ArrayList<Movie>();
+    public static void GetTopWatchedMovies() {
+        ArrayList<Movie> sortedMoviesRating = new ArrayList<Movie>();
         for (int i = 0; i < MovieList.size(); i++) {
             sortedMoviesRating.add(MovieList.get(i));
         }
         Collections.sort(sortedMoviesRating, new Comparator<Movie>() {
 
             public int compare(Movie o1, Movie o2) {
-                if (o1.watchcount<o2.watchcount) {
+                if (o1.watchcount < o2.watchcount) {
                     return 1;
-                }
-                else if (o1.watchcount>o2.watchcount) {
+                } else if (o1.watchcount > o2.watchcount) {
                     return -1;
 
-                }
-                else
-                {
+                } else {
                     return 0;
                 }
             }
         });
 
         for (int i = 0; i < sortedMoviesRating.size(); i++) {
-            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).watchcount);
+            System.out.println((i + 1) + ") " + sortedMoviesRating.get(i).getMovieTitle() + " "
+                    + sortedMoviesRating.get(i).watchcount);
         }
 
     }
 
-
-    /////////////////ActorList
+    ///////////////// ActorList
     public static void getActorList() {
         System.out.println("Actor List : ");
-        if(ActorList.isEmpty()) {
+        if (ActorList.isEmpty()) {
             System.out.println("No Actor yet");
         } else {
             for (int i = 0; i < ActorList.size(); i++) {
-                System.out.println(i + 1 + ") " + ActorList.get(i).getFirst_name()+' '+ ActorList.get(i).getLast_name());
+                System.out.println(
+                        i + 1 + ") " + ActorList.get(i).getFirst_name() + ' ' + ActorList.get(i).getLast_name());
             }
         }
     }
 
-    public static void SearchActorByName(String name_of_Actor){
+    public static void SearchActorByName(String name_of_Actor) {
         int index = 1;
-        for (int i = 0; i <ActorList.size(); i++) {
-            if (ActorList.get(i).getFirst_name().contains(name_of_Actor) || ActorList.get(i).getLast_name().contains(name_of_Actor) ){
-                System.out.println(i + 1 + ") " + ActorList.get(i).getFirst_name()+' '+ ActorList.get(i).getLast_name());
+        for (int i = 0; i < ActorList.size(); i++) {
+            if (ActorList.get(i).getFirst_name().contains(name_of_Actor)
+                    || ActorList.get(i).getLast_name().contains(name_of_Actor)) {
+                System.out.println(
+                        i + 1 + ") " + ActorList.get(i).getFirst_name() + ' ' + ActorList.get(i).getLast_name());
             }
         }
     }
 
-    /////////////////DirectorList
+    ///////////////// DirectorList
     public static void getDirectorList() {
         System.out.println("Director List : ");
-        if(DirectorList.isEmpty()) {
+        if (DirectorList.isEmpty()) {
             System.out.println("No Director yet");
         } else {
             for (int i = 0; i < DirectorList.size(); i++) {
-                System.out.println(i + 1 + ") " + DirectorList.get(i).getFirst_name()+' '+ DirectorList.get(i).getLast_name());
+                System.out.println(
+                        i + 1 + ") " + DirectorList.get(i).getFirst_name() + ' ' + DirectorList.get(i).getLast_name());
             }
         }
     }
 
-    public static void SearchDirectorByName(String name_of_Director){
+    public static void SearchDirectorByName(String name_of_Director) {
         int index = 1;
-        for (int i = 0; i <DirectorList.size(); i++) {
-            if (DirectorList.get(i).getFirst_name().contains(name_of_Director) || DirectorList.get(i).getLast_name().contains(name_of_Director) ){
-                System.out.println(i + 1 + ") " + DirectorList.get(i).getFirst_name()+' '+ DirectorList.get(i).getLast_name());
+        for (int i = 0; i < DirectorList.size(); i++) {
+            if (DirectorList.get(i).getFirst_name().contains(name_of_Director)
+                    || DirectorList.get(i).getLast_name().contains(name_of_Director)) {
+                System.out.println(
+                        i + 1 + ") " + DirectorList.get(i).getFirst_name() + ' ' + DirectorList.get(i).getLast_name());
             }
         }
     }
 
-    /////////////////MovieList
+    ///////////////// MovieList
     public static void getMovieList() {
         System.out.println("Movie List : ");
-        if(MovieList.isEmpty()) {
+        if (MovieList.isEmpty()) {
             System.out.println("No Movies Available");
         } else {
             for (int i = 0; i < MovieList.size(); i++) {
@@ -218,10 +223,11 @@ public class User {
     }
 
     /// <summary>
-    /// search on Movie list only because it's static method.The parameter "genre_of_Movie" is an input from the site not the client
+    /// search on Movie list only because it's static method.The parameter
+    /// "genre_of_Movie" is an input from the site not the client
     /// </summary>
     /// <param name="genre_of_Movie">what genre the client want to look for.</param>
-    public static void SearchMovieByGenre(String genre_of_Movie) { //search on the movie list
+    public static void SearchMovieByGenre(String genre_of_Movie) { // search on the movie list
         int index = 1;
         for (int i = 0; i < MovieList.size(); i++) {
             for (int j = 0; j < MovieList.get(i).Genres.length; j++) {
@@ -232,28 +238,28 @@ public class User {
         }
     }
 
-    public static void SearchMovieByName(String name_of_Movie){
+    public static void SearchMovieByName(String name_of_Movie) {
         int index = 1;
-        for (int i = 0; i <MovieList.size(); i++) {
-            if (MovieList.get(i).getMovieTitle().toLowerCase().contains(name_of_Movie.toLowerCase())){
+        for (int i = 0; i < MovieList.size(); i++) {
+            if (MovieList.get(i).getMovieTitle().toLowerCase().contains(name_of_Movie.toLowerCase())) {
                 System.out.println(index++ + ") " + MovieList.get(i).getMovieTitle());
             }
         }
     }
 
-
-
-/////////////////Watched and Later list
+    ///////////////// Watched and Later list
 
     /// <summary>
-    /// search on the watched and later list and the parameters "Wanted_List"and "genre_of_Movie" are inputs from the site not the client
+    /// search on the watched and later list and the parameters "Wanted_List"and
+    /// "genre_of_Movie" are inputs from the site not the client
     /// </summary>
     /// <param name="Wanted_List">what list the client want to search on.</param>
     /// <param name="genre_of_Movie">what genre the client want to look for.</param>
-    /// <param name="name_of_Movie">what movie title the client want to look for.</param>
-    public void SearchMovieByGenre(String Wanted_List,String genre_of_Movie) {
+    /// <param name="name_of_Movie">what movie title the client want to look
+    /// for.</param>
+    public void SearchMovieByGenre(String Wanted_List, String genre_of_Movie) {
         ArrayList<Movie> List = new ArrayList<Movie>();
-        switch (Wanted_List.toLowerCase()){
+        switch (Wanted_List.toLowerCase()) {
             case "watched":
                 List = Watched;
                 break;
@@ -271,9 +277,9 @@ public class User {
         }
     }
 
-    public void SearchMovieByName(String Wanted_List,String name_of_Movie) {
+    public void SearchMovieByName(String Wanted_List, String name_of_Movie) {
         ArrayList<Movie> List = new ArrayList<Movie>();
-        switch (Wanted_List.toLowerCase()){
+        switch (Wanted_List.toLowerCase()) {
             case "watched":
                 List = Watched;
                 break;
@@ -289,20 +295,19 @@ public class User {
         }
     }
 
-
-    /////////////////Watched list
+    ///////////////// Watched list
 
     public void addMovieToWatched(Movie movie) {
         boolean Is_Added_Before_InWatched = false;
         for (int i = 0; i < Watched.size(); i++) {
-            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+            if (Watched.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())) {
                 Is_Added_Before_InWatched = true;
                 break;
             }
         }
-        if (!Is_Added_Before_InWatched){
+        if (!Is_Added_Before_InWatched) {
             movie.watchcount++;
-            MoviesStatues.put(movie,true);
+            MoviesStatues.put(movie, true);
             Later.remove(movie);
             Watched.add(movie);
         }
@@ -310,7 +315,7 @@ public class User {
 
     public void getWatched() {
         System.out.println("Watched Movie List : ");
-        if(Watched.isEmpty()) {
+        if (Watched.isEmpty()) {
             System.out.println("No Movies Available");
         } else {
             for (int i = 0; i < Watched.size(); i++) {
@@ -320,26 +325,25 @@ public class User {
     }
 
     public void removeMovieFromWatched(Movie movie) {
-        MoviesStatues.put(movie,false);
-        if(Watched.remove(movie)) {
+        MoviesStatues.put(movie, false);
+        if (Watched.remove(movie)) {
             movie.watchcount--;
         }
         Watched.remove(movie);
     }
 
-
-    /////////////////Later list
+    ///////////////// Later list
 
     public void addMovieToLater(Movie movie) {
         boolean Is_Added_Before_InLater = false;
         for (int i = 0; i < Later.size(); i++) {
-            if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())){
+            if (Later.get(i).getMovieTitle().toLowerCase().equals(movie.getMovieTitle().toLowerCase())) {
                 Is_Added_Before_InLater = true;
                 break;
             }
         }
-        if (!Is_Added_Before_InLater){
-            MoviesStatues.put(movie,false);
+        if (!Is_Added_Before_InLater) {
+            MoviesStatues.put(movie, false);
             Watched.remove(movie);
             Later.add(movie);
         }
@@ -347,7 +351,7 @@ public class User {
 
     public void getLater() {
         System.out.println("Watch Later Movie List : ");
-        if(Later.isEmpty()) {
+        if (Later.isEmpty()) {
             System.out.println("No Movies Available");
         } else {
             for (int i = 0; i < Later.size(); i++) {
@@ -362,35 +366,34 @@ public class User {
 
     /********************** END OF needed to be tested *************************/
 
-    /////////////////Subscription
-    //2et2aked men en mafish haga 2et8aiaret fi el Subscription class men lama ziad 2eshta8al
+    ///////////////// Subscription
+    // 2et2aked men en mafish haga 2et8aiaret fi el Subscription class men lama ziad
+    ///////////////// 2eshta8al
 
-    public void EditSubscription (int changedprice){ //the parameter is the new price plan he wants to subscribe to
+    public void EditSubscription(int changedprice) { // the parameter is the new price plan he wants to subscribe to
 
         subscription.setPriceOfPlan(changedprice);
     }
 
-    public void Cancel_Subscription()
-    {
+    public void Cancel_Subscription() {
         subscription.setPriceOfPlan(0);
     }
 
+    // public void Add_Subscription() lao 3az ie3mel add li Subscription i5osh 3ala
+    // el EditSubscription
+    // {
+    // subscription.setPriceOfPlan(0);
+    // }
 
-//        public void Add_Subscription() lao 3az ie3mel add li Subscription i5osh 3ala el EditSubscription
-//    {
-//        subscription.setPriceOfPlan(0);
-//    }
+    // public Subscription getSub(){ mesh faker eh lazmetha
+    // sub.SatuesSubscription(getUser_ID());
+    // }
+    // public void setSub(Subscription sub) {
+    // sub.
+    //
+    // }
 
-
-    //    public Subscription getSub(){  mesh faker eh lazmetha
-//        sub.SatuesSubscription(getUser_ID());
-//    }
-//    public void setSub(Subscription sub) {
-//        sub.
-//
-//    }
-
-    /********************** setter and getter**********************/
+    /********************** setter and getter **********************/
     public String getFirst_name() {
         return first_name;
     }
@@ -427,8 +430,8 @@ public class User {
         return theme_preference;
     }
 
-    public void setTheme_preference(String theme_preference) { //make sure that the theme_preference is lowercase
-        if (theme_preference=="dark"||theme_preference=="light")//means use to .lowerCase or something like that
+    public void setTheme_preference(String theme_preference) { // make sure that the theme_preference is lowercase
+        if (theme_preference == "dark" || theme_preference == "light")// means use to .lowerCase or something like that
         {
             this.theme_preference = theme_preference;
         }

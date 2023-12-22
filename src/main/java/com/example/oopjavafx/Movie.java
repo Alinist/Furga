@@ -17,7 +17,7 @@ public class Movie {
 
     public int watchcount;
 
-    private final int movieID; // can be seen by Director
+    private final String movieID; // can be seen by Director
 
     private String movieTitle;
 
@@ -60,7 +60,7 @@ public class Movie {
         user_Rating = 0;
         Is_Watched = false;
         // this.movieID = UUID.randomUUID().toString();
-        this.movieID = 0;
+        this.movieID = UUID.randomUUID().toString();
         this.movieTitle = null;
         this.releaseDate = null;
         this.RunningTime = 0;
@@ -72,11 +72,11 @@ public class Movie {
         this.revenue = 0;
     }
 
-    public Movie(int movieID) {
+    public Movie(String movieID) {
         this.movieID = movieID;
     }
 
-    public Movie(boolean is_Watched, int movieID, String movieTitle, String releaseDate, int runningTime,
+    public Movie(boolean is_Watched, String movieID, String movieTitle, String releaseDate, int runningTime,
             double imdb_score, String country, double budget, double revenue) {
         Is_Watched = is_Watched;
         this.movieID = movieID;
@@ -279,7 +279,7 @@ public class Movie {
         this.revenue = revenue;
     }
 
-    public int getMovieID() {
+    public String getMovieID() {
         return movieID;
     }
 
