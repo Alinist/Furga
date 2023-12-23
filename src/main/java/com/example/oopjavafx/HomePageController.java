@@ -79,25 +79,33 @@ public class HomePageController implements Initializable {
         stage.show();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-        User.MovieList = Main.moviesData;
-
-        for(int i = 0 ; i < User.MovieList.size() ; i++) {
+    public void displayMovies(ArrayList<Movie> Movies) {
+        MovieListLayout.getChildren().clear();
+        for(int i = 0 ; i < Movies.size() ; i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
 
             try {
                 HBox hbox = fxmlLoader.load();
                 SearchedMovieController searchedMovieController = fxmlLoader.getController();
-                searchedMovieController.setMovieData(User.MovieList.get(i));
+                searchedMovieController.setMovieData(Movies.get(i));
                 MovieListLayout.getChildren().add(hbox);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+
+        User.MovieList = Main.moviesData;
+        User.DirectorList = Main.directorData;
+        User.ActorList = Main.actorsData;
+
+        displayMovies(User.MovieList);
 
         ForYouButton.setStyle("-fx-text-fill:  #4dde90");
         TrendingButton.setStyle("-fx-text-fill:  #ffffff");
@@ -184,6 +192,8 @@ public class HomePageController implements Initializable {
         TrendingButton.setStyle("-fx-text-fill:  #4dde90");
         ForYouButton.setStyle("-fx-text-fill:  #ffffff");
         PopularButton.setStyle("-fx-text-fill:  #ffffff");
+        ArrayList<Movie> TrendingMovies = User.GetRecentMovies(5);
+        displayMovies(TrendingMovies);
     }
 
     public void Popular_Controller(ActionEvent e){
@@ -203,6 +213,12 @@ public class HomePageController implements Initializable {
     }
 
     public void WatchedList(ActionEvent event) throws IOException {
+        Main.CurrentUser.Watched.clear();
+        for(int i = 0 ; i < Main.watchRecordData.size() ; i++) {
+            if(Main.watchRecordData.get(i).getUserId().equalsIgnoreCase(Main.CurrentUser.getUser_ID())) {
+                Main.CurrentUser.Watched.add(Main.watchRecordData.get(i));
+            }
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("WatchList.fxml"));
         root = loader.load();
         ChangeScene(event);
@@ -220,6 +236,7 @@ public class HomePageController implements Initializable {
         root = loader.load();
         SearchController searchController = loader.getController();
         searchController.SearchBar.setText(SearchBar.getText());
+        searchController.search(event);
         ChangeScene(event);
         stage.setResizable(true);
     }
@@ -236,8 +253,4 @@ public class HomePageController implements Initializable {
         ChangeScene(event);
         stage.setResizable(true);
     }
-
-
-
-
 }

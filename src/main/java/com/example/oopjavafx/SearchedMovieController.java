@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class SearchedMovieController implements Initializable {
@@ -74,8 +76,6 @@ public class SearchedMovieController implements Initializable {
         RunningTime.setText(String.valueOf((movie.getRunningTime()/60)) + "h " + String.valueOf(movie.getRunningTime()-60*(movie.getRunningTime()/60)) + "min");
         Image movieposter = new Image(String.valueOf(getClass().getResource("Images/" + movie.getMovieTitle() + ".png")));
         MoviePoster.setImage(movieposter);
-        System.out.println(movie.getMovieTitle());
-//        HomePageController.MakeImageRounded(MoviePoster,"Images/Harry Potter and the Chamber of Secrets.png");
     }
 
     public void ChangeScene(ActionEvent event) {
@@ -86,7 +86,22 @@ public class SearchedMovieController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        toWatched.setOnMouseClicked(event -> {
+            Watch_Record watchRecord;
+            for(int i = 0 ; i < User.MovieList.size() ; i++) {
+                if(User.MovieList.get(i).getMovieTitle().equalsIgnoreCase(Moviename_ReleaseDate.getText().substring(0,Moviename_ReleaseDate.getText().length() - 7))) {
+                    watchRecord = new Watch_Record(Main.CurrentUser.getUser_ID(),User.MovieList.get(i),0,LocalDate.now().getDayOfMonth(),LocalDate.now().getMonthValue(),LocalDate.now().getYear());
+                    Main.CurrentUser.Watched.add(watchRecord);
+                    Main.watchRecordData.add(watchRecord);
+                    System.out.println(Main.CurrentUser.Watched.get(0).getUserId());
+                    System.out.println(Main.CurrentUser.Watched.size());
+                    System.out.println(watchRecord.getMovie().getMovieTitle());
+                    System.out.println(watchRecord.getRating());
+                    System.out.println(watchRecord.getDate());
+                }
+            }
 
+        });
     }
     @FXML
     void WatchMovie(ActionEvent event) throws IOException {
@@ -99,7 +114,7 @@ public class SearchedMovieController implements Initializable {
 
     @FXML
     void AddToWatched(ActionEvent event) {
-
+//        System.out.println();
     }
 
 }

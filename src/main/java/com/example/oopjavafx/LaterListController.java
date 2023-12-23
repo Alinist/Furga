@@ -76,19 +76,19 @@ public class LaterListController implements Initializable{
 ////        for (int i = 0 ; i < movies.size() ; i++) {
 ////
 ////        }
-        for(int i = 0 ; i < movies.size() ; i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("LaterMovie.fxml"));
-
-            try {
-                HBox hbox = fxmlLoader.load();
-                LaterMovieController laterMovieController = fxmlLoader.getController();
-                MovieListLayout.getChildren().add(hbox);
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+//        for(int i = 0 ; i < movies.size() ; i++) {
+//            FXMLLoader fxmlLoader = new FXMLLoader();
+//            fxmlLoader.setLocation(getClass().getResource("LaterMovie.fxml"));
+//
+//            try {
+//                HBox hbox = fxmlLoader.load();
+//                LaterMovieController laterMovieController = fxmlLoader.getController();
+//                MovieListLayout.getChildren().add(hbox);
+//
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
 
         pane1.setVisible(false);
 

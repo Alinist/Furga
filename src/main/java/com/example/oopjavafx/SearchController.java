@@ -45,7 +45,7 @@ public class SearchController implements Initializable {
 
     private String[] sortbyItems = {"Any", "Rating", "Release Date"};
 
-    private String[] genreItems = {"Any", "Action", "Comedy", "Adventure"};
+    private String[] genreItems = {"Any", "Action", "Comedy", "Adventure" , "Fantasy" , "Horror"};
 
     private String[] typeItems = {"Any", "Movie", "Director", "Actor"};
 
@@ -85,6 +85,85 @@ public class SearchController implements Initializable {
     @FXML
     private Label UserName;
 
+    public void setMovies (String genre) {
+        ArrayList<Movie> SearchedMovies = User.SearchMovieByName(SearchBar.getText());
+        ArrayList<Movie> SearchedGenreMovies = new ArrayList<>();
+        if(!genre.equalsIgnoreCase("any")) {
+            for(int i = 0 ; i < SearchedMovies.size() ; i++) {
+                for(int j = 0 ; j < SearchedMovies.get(i).getGenres().length ; j++) {
+                    if(SearchedMovies.get(i).getGenres()[j].equalsIgnoreCase(genre)) {
+                        SearchedGenreMovies.add(SearchedMovies.get(i));
+                    }
+                }
+            }
+            for(int i = 0 ; i < SearchedGenreMovies.size() ; i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
+
+                try {
+                    HBox hbox = fxmlLoader.load();
+                    SearchedMovieController searchedMovieController = fxmlLoader.getController();
+                    searchedMovieController.setMovieData(SearchedGenreMovies.get(i));
+                    MovieListLayout.getChildren().add(hbox);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            for (int i = 0; i < SearchedMovies.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
+
+                try {
+                    HBox hbox = fxmlLoader.load();
+                    SearchedMovieController searchedMovieController = fxmlLoader.getController();
+                    searchedMovieController.setMovieData(SearchedMovies.get(i));
+                    MovieListLayout.getChildren().add(hbox);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    public void setActors () {
+        ArrayList<Actor> SearchedActors = User.SearchActorByName(SearchBar.getText());
+        for(int i = 0 ; i < SearchedActors.size() ; i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Person.fxml"));
+
+            try {
+                HBox hbox = fxmlLoader.load();
+                PersonController actorController = fxmlLoader.getController();
+                actorController.setActorData(SearchedActors.get(i));
+                MovieListLayout.getChildren().add(hbox);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void setDirectors() {
+        ArrayList<Director> SearchedDirectors = User.SearchDirectorByName(SearchBar.getText());
+        for(int i = 0 ; i < SearchedDirectors.size() ; i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("Person.fxml"));
+
+            try {
+                HBox hbox = fxmlLoader.load();
+                PersonController directorController = fxmlLoader.getController();
+                directorController.setDirectorData(SearchedDirectors.get(i));
+                MovieListLayout.getChildren().add(hbox);
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -97,46 +176,6 @@ public class SearchController implements Initializable {
         GenreBox.getSelectionModel().selectFirst();
         TypeBox.getSelectionModel().selectFirst();
         ArrayList<Actor> actors = new ArrayList<>(Actors());
-        for(int i = 0 ; i < User.MovieList.size() ; i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
-
-            try {
-                HBox hbox = fxmlLoader.load();
-                SearchedMovieController searchedMovieController = fxmlLoader.getController();
-                searchedMovieController.setMovieData(User.MovieList.get(i));
-                MovieListLayout.getChildren().add(hbox);
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        for(int i = 0 ; i < actors.size() ; i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("Person.fxml"));
-
-            try {
-                HBox hbox = fxmlLoader.load();
-                PersonController actorController = fxmlLoader.getController();
-                MovieListLayout.getChildren().add(hbox);
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        for(int i = 0 ; i < actors.size() ; i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("Person.fxml"));
-
-            try {
-                HBox hbox = fxmlLoader.load();
-                PersonController actorController = fxmlLoader.getController();
-                MovieListLayout.getChildren().add(hbox);
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
         pane1.setVisible(false);
 
         FadeTransition fadeTransition=new FadeTransition(Duration.seconds(0.25),pane1);
@@ -146,6 +185,10 @@ public class SearchController implements Initializable {
         TranslateTransition translateTransition=new TranslateTransition(Duration.seconds(0.25),pane2);
         translateTransition.setByX(+600);
         translateTransition.play();
+
+        setMovies("Any");
+        setActors();
+        setDirectors();
 
         menu.setOnMouseClicked(event -> {
             BlockingPaneExists = false;
@@ -251,5 +294,28 @@ public class SearchController implements Initializable {
         root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);
+    }
+
+    public void search(ActionEvent event) {
+        MovieListLayout.getChildren().clear();
+        if(TypeBox.getValue().equalsIgnoreCase("actor")) {
+            setActors();
+            SortByBox.setDisable(true);
+            GenreBox.setDisable(true);
+        } else if (TypeBox.getValue().equalsIgnoreCase("director")) {
+            setDirectors();
+            SortByBox.setDisable(true);
+            GenreBox.setDisable(true);
+        } else if (TypeBox.getValue().equalsIgnoreCase("movie")){
+            SortByBox.setDisable(false);
+            GenreBox.setDisable(false);
+            setMovies(GenreBox.getValue());
+        } else {
+            SortByBox.setDisable(false);
+            GenreBox.setDisable(false);
+            setMovies(GenreBox.getValue());
+            setActors();
+            setDirectors();
+        }
     }
 }

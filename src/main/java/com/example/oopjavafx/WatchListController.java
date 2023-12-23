@@ -73,8 +73,7 @@ public class WatchListController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UserName.setText(Main.CurrentUser.getFirst_name() + " " + Main.CurrentUser.getLast_name());
-
-        for(int i = 0 ; i < movies.size() ; i++) {
+        for(int i = 0 ; i < Main.CurrentUser.Watched.size() ; i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("WatchedMovie.fxml"));
 
@@ -87,6 +86,9 @@ public class WatchListController implements Initializable{
                 throw new RuntimeException(e);
             }
         }
+
+        System.out.println(Main.CurrentUser.Watched.size());
+        System.out.println(Main.laterLists.size());
 
         pane1.setVisible(false);
 

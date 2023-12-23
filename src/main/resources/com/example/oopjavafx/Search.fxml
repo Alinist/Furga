@@ -16,7 +16,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="body" stylesheets="@WatchList.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.SearchController">
    <children>
       <Button fx:id="Furga" layoutX="187.0" layoutY="62.0" mnemonicParsing="false" onAction="#HomePage" style="-fx-background-color: transparent;" styleClass="labels" stylesheets="@WatchList.css" text="Furga" />
-      <TextField fx:id="SearchBar" layoutX="452.0" layoutY="80.0" prefHeight="59.0" prefWidth="631.0" styleClass="search" stylesheets="@WatchList.css">
+      <TextField fx:id="SearchBar" layoutX="452.0" layoutY="80.0" onAction="#search" prefHeight="59.0" prefWidth="631.0" styleClass="search" stylesheets="@WatchList.css">
          <font>
             <Font size="28.0" />
          </font>
@@ -41,19 +41,19 @@
             <Font name="Fredoka Bold" size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="SortByBox" layoutX="405.0" layoutY="192.0" prefHeight="50.0" prefWidth="300.0" promptText="Any" stylesheets="@Search.css" />
+      <ComboBox fx:id="SortByBox" layoutX="405.0" layoutY="192.0" onAction="#search" prefHeight="50.0" prefWidth="300.0" promptText="Any" stylesheets="@Search.css" />
       <Label layoutX="725.0" layoutY="198.0" text="Genre:" textFill="WHITE">
          <font>
             <Font name="Fredoka Bold" size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="GenreBox" layoutX="873.0" layoutY="192.0" prefHeight="50.0" prefWidth="300.0" promptText="Any" stylesheets="@Search.css" />
+      <ComboBox fx:id="GenreBox" layoutX="873.0" layoutY="192.0" onAction="#search" prefHeight="50.0" prefWidth="300.0" promptText="Any" stylesheets="@Search.css" />
       <Label layoutX="1200.0" layoutY="198.0" text="Type:" textFill="WHITE">
          <font>
             <Font name="Fredoka Bold" size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="TypeBox" layoutX="1325.0" layoutY="192.0" prefHeight="50.0" prefWidth="300.0" promptText="Any" stylesheets="@Search.css" />
+      <ComboBox fx:id="TypeBox" layoutX="1325.0" layoutY="192.0" onAction="#search" prefHeight="50.0" prefWidth="300.0" promptText="Any" stylesheets="@Search.css" />
       <AnchorPane fx:id="pane1" prefHeight="1080.0" prefWidth="1392.0" style="-fx-background-color: #2d2d2d;" />
       <AnchorPane id="menu" fx:id="pane2" layoutX="1392.0" layoutY="2.0" prefHeight="1080.0" prefWidth="537.0" style="-fx-background-color: #000000;" stylesheets="@WatchList.css">
          <children>

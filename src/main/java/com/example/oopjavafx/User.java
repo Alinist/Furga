@@ -111,13 +111,15 @@ public class User {
 
     /********************** START OF needed to be tested *************************/
 /////////////////All User
-    public static void GetRecentMovies(int max_recent_movies_want_to_appear) { // ne5tar limit li 3adad el haiezharo fi el recent
+    public static ArrayList<Movie> GetRecentMovies(int max_recent_movies_want_to_appear) {
+        ArrayList<Movie> Movies = new ArrayList<>();
         int index = 1;
         for (int i = MovieList.size()-1; i >= 0; i--) {
             if (i>((MovieList.size()-1)-max_recent_movies_want_to_appear)){
-                System.out.println(index++ + ") " +MovieList.get(i).getMovieTitle());
+                Movies.add(MovieList.get(i));
             }
         }
+        return Movies;
     }
 
     public static void GetTopRatedMovies(){
@@ -189,15 +191,16 @@ public class User {
         }
     }
 
-    public static void SearchActorByName(String name_of_Actor) {
+    public static ArrayList<Actor> SearchActorByName(String name_of_Actor) {
+        ArrayList<Actor> ActorsFound = new ArrayList<>();
         int index = 1;
         for (int i = 0; i < ActorList.size(); i++) {
-            if (ActorList.get(i).getFirst_name().contains(name_of_Actor)
-                    || ActorList.get(i).getLast_name().contains(name_of_Actor)) {
-                System.out.println(
-                        i + 1 + ") " + ActorList.get(i).getFirst_name() + ' ' + ActorList.get(i).getLast_name());
+            if (ActorList.get(i).getFirst_name().toLowerCase().contains(name_of_Actor.toLowerCase())
+                    || ActorList.get(i).getLast_name().toLowerCase().contains(name_of_Actor.toLowerCase())) {
+                ActorsFound.add(ActorList.get(i));
             }
         }
+        return ActorsFound;
     }
 
     ///////////////// DirectorList
@@ -213,15 +216,16 @@ public class User {
         }
     }
 
-    public static void SearchDirectorByName(String name_of_Director) {
+    public static ArrayList<Director> SearchDirectorByName(String name_of_Director) {
+        ArrayList<Director> DirectorsFound = new ArrayList<>();
         int index = 1;
         for (int i = 0; i < DirectorList.size(); i++) {
-            if (DirectorList.get(i).getFirst_name().contains(name_of_Director)
-                    || DirectorList.get(i).getLast_name().contains(name_of_Director)) {
-                System.out.println(
-                        i + 1 + ") " + DirectorList.get(i).getFirst_name() + ' ' + DirectorList.get(i).getLast_name());
+            if (DirectorList.get(i).getFirst_name().toLowerCase().contains(name_of_Director.toLowerCase())
+                    || DirectorList.get(i).getLast_name().toLowerCase().contains(name_of_Director.toLowerCase())) {
+                DirectorsFound.add(DirectorList.get(i));
             }
         }
+        return DirectorsFound;
     }
 
 
@@ -261,24 +265,28 @@ public class User {
     /// search on Movie list only because it's static method.The parameter "genre_of_Movie" is an input from the site not the client
     /// </summary>
     /// <param name="genre_of_Movie">what genre the client want to look for.</param>
-    public static void SearchMovieByGenre(String genre_of_Movie) { //search on the movie list
+    public static ArrayList<Movie> SearchMovieByGenre(String genre_of_Movie) { //search on the movie list
+        ArrayList<Movie> MoviesFound = new ArrayList<>();
         int index = 1;
         for (int i = 0; i < MovieList.size(); i++) {
             for (int j = 0; j < MovieList.get(i).Genres.length; j++) {
                 if (MovieList.get(i).Genres[j].toLowerCase().equals(genre_of_Movie.toLowerCase())) {
-                    System.out.println(index++ + ") " + MovieList.get(i).getMovieTitle());
+                    MoviesFound.add(MovieList.get(i));
                 }
             }
         }
+        return MoviesFound;
     }
 
-    public static void SearchMovieByName(String name_of_Movie){
+    public static ArrayList<Movie> SearchMovieByName(String name_of_Movie){
+        ArrayList<Movie> MoviesFound = new ArrayList<>();
         int index = 1;
         for (int i = 0; i <MovieList.size(); i++) {
             if (MovieList.get(i).getMovieTitle().toLowerCase().contains(name_of_Movie.toLowerCase())){
-                System.out.println(index++ + ") " + MovieList.get(i).getMovieTitle());
+               MoviesFound.add(MovieList.get(i));
             }
         }
+        return MoviesFound;
     }
 
 

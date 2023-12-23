@@ -6,19 +6,19 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Line?>
 
-<HBox fx:id="WatchedMovie" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.PersonController">
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopjavafx.PersonController">
    <children>
       <AnchorPane prefHeight="524.0" prefWidth="1550.0" style="-fx-background-color: #1c1c1c;" styleClass="movie-container" stylesheets="@WatchList.css">
          <children>
-            <ImageView fitHeight="476.0" fitWidth="306.0" layoutX="40.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="384.0" layoutY="87.0" prefHeight="71.0" prefWidth="951.0" style="-fx-font-size: 60px;" styleClass="labels1" stylesheets="@MovieScene.css" text="FirstName + LastName" />
-            <Label layoutX="384.0" layoutY="210.0" prefHeight="39.0" prefWidth="364.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Nationality + &quot;person&quot;" />
+            <ImageView fx:id="PersonPic" fitHeight="476.0" fitWidth="306.0" layoutX="40.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="fullName" layoutX="384.0" layoutY="87.0" prefHeight="71.0" prefWidth="951.0" style="-fx-font-size: 60px;" styleClass="labels1" stylesheets="@MovieScene.css" text="FirstName + LastName" />
+            <Label fx:id="Nationality" layoutX="384.0" layoutY="210.0" prefHeight="39.0" prefWidth="364.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Nationality + &quot;person&quot;" />
             <Label layoutX="384.0" layoutY="247.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Gender:" />
-            <Label layoutX="528.0" layoutY="247.0" prefHeight="39.0" prefWidth="803.0" styleClass="labels1" stylesheets="@MovieScene.css" text="male/female" />
+            <Label fx:id="Gender" layoutX="528.0" layoutY="247.0" prefHeight="39.0" prefWidth="803.0" styleClass="labels1" stylesheets="@MovieScene.css" text="male/female" />
             <Label layoutX="384.0" layoutY="284.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Age:" />
-            <Label layoutX="467.0" layoutY="284.0" prefHeight="39.0" prefWidth="114.0" styleClass="labels1" stylesheets="@MovieScene.css" text="number" />
+            <Label fx:id="Age" layoutX="467.0" layoutY="284.0" prefHeight="39.0" prefWidth="114.0" styleClass="labels1" stylesheets="@MovieScene.css" text="number" />
             <Label layoutX="384.0" layoutY="320.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Known For:" />
-            <Label layoutX="561.0" layoutY="320.0" prefHeight="39.0" prefWidth="931.0" styleClass="labels1" stylesheets="@MovieScene.css" text="best movies" />
+            <Label fx:id="MoviesParticipatedIn" alignment="TOP_LEFT" layoutX="561.0" layoutY="320.0" prefHeight="112.0" prefWidth="931.0" styleClass="labels1" stylesheets="@MovieScene.css" text="best movies" wrapText="true" />
             <Line endX="1319.0" layoutX="182.0" layoutY="538.0" startX="-134.0" stroke="WHITE" />
          </children>
       </AnchorPane>
