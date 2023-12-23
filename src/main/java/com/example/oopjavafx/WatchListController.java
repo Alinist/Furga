@@ -22,6 +22,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class WatchListController implements Initializable{
@@ -80,6 +81,7 @@ public class WatchListController implements Initializable{
             try {
                 HBox hbox = fxmlLoader.load();
                 WatchedMovieController watchedMovieController = fxmlLoader.getController();
+                watchedMovieController.setMovieData(Main.CurrentUser.Watched.get(i).getMovie());
                 MovieListLayout.getChildren().add(hbox);
 
             } catch (IOException e) {
@@ -179,12 +181,19 @@ public class WatchListController implements Initializable{
         root = loader.load();
         SearchController searchController = loader.getController();
         searchController.SearchBar.setText(SearchBar.getText());
+        searchController.search(event);
         ChangeScene(event);
         stage.setResizable(true);
     }
 
     public void Subscription(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        Calendar calendar = Calendar.getInstance();
+        FXMLLoader loader;
+        if(Main.CurrentUser.subscription.CheckIfSubscriptionEnding(calendar)) {
+            loader = new FXMLLoader(getClass().getResource("My_Subscription.fxml"));
+        } else {
+            loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        }
         root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);

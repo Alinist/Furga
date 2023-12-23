@@ -175,8 +175,8 @@ public class SubscriptionController implements Initializable {
         root = loader.load();
         SearchController searchController = loader.getController();
         searchController.SearchBar.setText(SearchBar.getText());
+        searchController.search(event);
         ChangeScene(event);
-        stage.setResizable(true);
         stage.setResizable(true);
     }
 

@@ -101,10 +101,6 @@ public class HomePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        User.MovieList = Main.moviesData;
-        User.DirectorList = Main.directorData;
-        User.ActorList = Main.actorsData;
-
         displayMovies(User.MovieList);
 
         ForYouButton.setStyle("-fx-text-fill:  #4dde90");

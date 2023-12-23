@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Main extends Application {
-    public User CurrentUser;
+    public static User CurrentUser;
     public static ArrayList<Movie> moviesData = new ArrayList<Movie>();
     public static ArrayList<Actor> actorsData = new ArrayList<Actor>();
     public static ArrayList<Director> directorData = new ArrayList<Director>();
@@ -143,7 +143,7 @@ public class Main extends Application {
                     currentValue = "";
                     System.out.println("Later List: "
                             + Movie.getMovieById(laterLists.get(userIdAndMovies[0]).get(0).getMovieID())
-                                    .getMovieTitle());
+                            .getMovieTitle());
                 }
             }
 
@@ -514,6 +514,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        User.MovieList = Main.moviesData;
+        User.DirectorList = Main.directorData;
+        User.ActorList = Main.actorsData;
         readUsers();
         readActors();
         readDirectors();

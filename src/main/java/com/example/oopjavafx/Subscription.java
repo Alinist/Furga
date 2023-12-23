@@ -37,7 +37,7 @@ public class Subscription {
 
     /**
      * Assign PriceOfPlan and set witch Subscription the user chose
-     * 
+     *
      * @param priceOfPlan the amount of money the user chose
      */
     public void setPriceOfPlan(int priceOfPlan) {
@@ -68,7 +68,7 @@ public class Subscription {
 
     /**
      * Check if the user's subscription has ended
-     * 
+     *
      * @param today to get the real life current time
      */
     public boolean CheckIfSubscriptionEnding(Calendar today) {
@@ -102,7 +102,7 @@ public class Subscription {
 
     /**
      * Send current status of the user's subscription
-     * 
+     *
      * @param today to get the real life current time
      */
     public void StatusSubscription(Calendar today) {
@@ -119,14 +119,14 @@ public class Subscription {
      * To calculate the days,the hours,the minutes and the seconds left
      * by using the different between the current time and the start date of the
      * user's subscription
-     * 
+     *
      * @param today to get the real life current time
      */
     public void CalculateTime(Calendar today) {
         int SECONDS_IN_A_DAY = 24 * 60 * 60;
         long diff = plan.StartDate.getTimeInMillis() - today.getTimeInMillis();
         long diffSec = diff / 1000;
-        long days = diffSec / SECONDS_IN_A_DAY;
+        long days = (diffSec / SECONDS_IN_A_DAY) + 30;
         long secondsDay = diffSec % SECONDS_IN_A_DAY;
         long seconds = secondsDay % 60;
         long minutes = (secondsDay / 60) % 60;
@@ -155,7 +155,7 @@ public class Subscription {
 
     /**
      * Obtaining the Highest monthly revenue of all 12 month
-     * 
+     *
      * @return the Highest monthly revenue of all 12 month
      */
     // Obtaining the Highest monthly revenue of all

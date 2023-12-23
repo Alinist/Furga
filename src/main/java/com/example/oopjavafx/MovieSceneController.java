@@ -84,25 +84,34 @@ public class MovieSceneController implements Initializable {
     private Button Furga;
 
     @FXML
-    private ImageView MoviePoster;
+    ImageView MoviePoster;
 
     @FXML
     private ImageView menu;
 
     @FXML
-    private Label movieTitle;
+    Label movieTitle;
 
     @FXML
     private Button Rate;
 
     @FXML
-    private Label yourRating;
+    Label yourRating;
 
     @FXML
     private Button RatingTheMovie;
 
     @FXML
     private Label UserName;
+
+    @FXML
+    Label MovieName;
+    @FXML
+    Label imdbRating;
+
+    @FXML
+    private Button Logout;
+
 
     private boolean menuOpened = false;
 
@@ -125,6 +134,7 @@ public class MovieSceneController implements Initializable {
         stage.setScene(scene1);
         stage.show();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -448,6 +458,19 @@ public class MovieSceneController implements Initializable {
             num10.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, new CornerRadii(50), Insets.EMPTY)));
         }
         yourRating.setText(clickedButton.getText().toString()+"/10");
+        for(int i = 0 ; i < Main.CurrentUser.Watched.size() ; i++) {
+            if(Main.CurrentUser.Watched.get(i).getMovie().getMovieTitle().equalsIgnoreCase(movieTitle.getText())) {
+                Main.CurrentUser.Watched.get(i).setRating(Integer.parseInt(clickedButton.getText()));
+                Main.CurrentUser.SetUserRatingForMovie(Main.CurrentUser.Watched.get(i).getMovie(), Main.CurrentUser.Watched.get(i).getRating() , i);
+                imdbRating.setText(String.valueOf(Main.CurrentUser.Watched.get(i).getMovie().getImdb_score()) + "/10");
+                System.out.println("Found");
+                for(int j = 0 ; j < Main.watchRecordData.size() ; j++) {
+                    if(Main.watchRecordData.get(j).getMovie().getMovieTitle().equalsIgnoreCase(movieTitle.getText()) && Main.watchRecordData.get(j).getUserId().equalsIgnoreCase(Main.CurrentUser.getUser_ID())) {
+                        Main.watchRecordData.get(j).setRating(Integer.parseInt(clickedButton.getText()));
+                    }
+                }
+            }
+        }
         clickedButton.setTextFill(Color.BLACK);
         clickedButton.setBackground(new Background(new BackgroundFill(Color.valueOf("#4dde90"), new CornerRadii(50), Insets.EMPTY)));
     }
@@ -482,13 +505,19 @@ public class MovieSceneController implements Initializable {
         root = loader.load();
         SearchController searchController = loader.getController();
         searchController.SearchBar.setText(SearchBar.getText());
+        searchController.search(event);
         ChangeScene(event);
-        stage.setResizable(true);
         stage.setResizable(true);
     }
 
     public void Subscription(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        Calendar calendar = Calendar.getInstance();
+        FXMLLoader loader;
+        if(Main.CurrentUser.subscription.CheckIfSubscriptionEnding(calendar)) {
+            loader = new FXMLLoader(getClass().getResource("My_Subscription.fxml"));
+        } else {
+            loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        }
         root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);

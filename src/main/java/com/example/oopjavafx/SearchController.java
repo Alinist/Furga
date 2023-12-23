@@ -23,6 +23,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -95,6 +96,9 @@ public class SearchController implements Initializable {
                         SearchedGenreMovies.add(SearchedMovies.get(i));
                     }
                 }
+//                if(SortByBox.getValue().equalsIgnoreCase("rating")) {
+//                    SearchedGenreMovies = User.GetTopRatedMovies();
+//                }
             }
             for(int i = 0 ; i < SearchedGenreMovies.size() ; i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -111,6 +115,11 @@ public class SearchController implements Initializable {
                 }
             }
         } else {
+            if(SortByBox.getValue().equalsIgnoreCase("rating")) {
+                SearchedMovies = User.GetTopRatedMovies();
+            } else {
+                SearchedMovies = User.SearchMovieByName(SearchBar.getText());
+            }
             for (int i = 0; i < SearchedMovies.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("SearchedMovie.fxml"));
@@ -226,31 +235,6 @@ public class SearchController implements Initializable {
         });
     }
 
-    private ArrayList<Movie> Movies() {
-        ArrayList<Movie> Movies = new ArrayList<>();
-        Movie movie = new Movie();
-
-        movie.setMovieTitle("avengers");
-        Movies.add(movie);
-
-        movie.setMovieTitle("spiderman");
-        Movies.add(movie);
-
-        movie.setMovieTitle("avengers");
-        Movies.add(movie);
-
-        movie.setMovieTitle("spiderman");
-        Movies.add(movie);
-
-        movie.setMovieTitle("avengers");
-        Movies.add(movie);
-
-        movie.setMovieTitle("spiderman");
-        Movies.add(movie);
-
-        return Movies;
-    }
-
     private ArrayList<Actor> Actors() {
         String[] movies = {"avengers", "spiderman"};
         String[] awards = {"best actor", "most beloved actor"};
@@ -290,7 +274,13 @@ public class SearchController implements Initializable {
     }
 
     public void Subscription(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        Calendar calendar = Calendar.getInstance();
+        FXMLLoader loader;
+        if(Main.CurrentUser.subscription.CheckIfSubscriptionEnding(calendar)) {
+            loader = new FXMLLoader(getClass().getResource("My_Subscription.fxml"));
+        } else {
+            loader = new FXMLLoader(getClass().getResource("Pricing_plan.fxml"));
+        }
         root = loader.load();
         ChangeScene(event);
         stage.setResizable(true);
@@ -307,15 +297,28 @@ public class SearchController implements Initializable {
             SortByBox.setDisable(true);
             GenreBox.setDisable(true);
         } else if (TypeBox.getValue().equalsIgnoreCase("movie")){
+            if(SortByBox.getValue().equalsIgnoreCase("rating")) {
+                GenreBox.setDisable(true);
+            }
             SortByBox.setDisable(false);
             GenreBox.setDisable(false);
             setMovies(GenreBox.getValue());
         } else {
-            SortByBox.setDisable(false);
-            GenreBox.setDisable(false);
-            setMovies(GenreBox.getValue());
-            setActors();
-            setDirectors();
+            if(SortByBox.getValue().equalsIgnoreCase("rating")) {
+                setMovies("Any");
+                SortByBox.setDisable(false);
+                GenreBox.setValue("Any");
+                TypeBox.setValue("Movie");
+                GenreBox.setDisable(true);
+//                TypeBox.setDisable(true);
+            } else {
+                setMovies(GenreBox.getValue());
+                setActors();
+                setDirectors();
+                SortByBox.setDisable(false);
+                GenreBox.setDisable(false);
+                TypeBox.setDisable(false);
+            }
         }
     }
 }

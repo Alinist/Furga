@@ -19,7 +19,7 @@ public class User {
         Watched = watched;
     }
 
-    private ArrayList<Movie> Later = new ArrayList<Movie>();
+    public ArrayList<Movie> Later = new ArrayList<Movie>();
     public Subscription subscription = new Subscription();
     private String first_name;
     private String last_name;
@@ -64,13 +64,14 @@ public class User {
 
 
     /////////////////Certain User
-    public void SetUserRatingForMovie(Movie movie,int rating) { //the movie must be on the watched list first (rating is not from the user but from the site)
+    public void SetUserRatingForMovie(Movie movie,int rating, int index) { //the movie must be on the watched list first (rating is not from the user but from the site)
         if (MoviesStatues.get(movie) == null || (boolean) MoviesStatues.get(movie)) {
             for (int i = 0; i < Watched.size(); i++) {
                 if (movie.getMovieTitle().equalsIgnoreCase(Watched.get(i).getMovie().getMovieTitle())) {
                     if (rating <= 10 && rating >= 1){
+//                        MoviesStatues.put(movie, false);
                         Watched.get(i).setRating(rating);
-                        Watched.get(i).getMovie().Ratings.add((float)rating);
+                        Watched.get(i).getMovie().Ratings.set(index,(float)rating);
                     }
                     else {
                         Watched.get(i).getMovie().Ratings.add(0f);
@@ -122,7 +123,7 @@ public class User {
         return Movies;
     }
 
-    public static void GetTopRatedMovies(){
+    public static ArrayList<Movie> GetTopRatedMovies(){
         ArrayList <Movie> sortedMoviesRating  = new ArrayList<Movie>();
         for (int i = 0; i < MovieList.size(); i++) {
             sortedMoviesRating.add(MovieList.get(i));
@@ -144,10 +145,10 @@ public class User {
             }
         });
 
-        for (int i = 0; i < sortedMoviesRating.size(); i++) {
-            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).getImdb_score());
-        }
-
+//        for (int i = 0; i < sortedMoviesRating.size(); i++) {
+//            System.out.println((i+1)+") "+sortedMoviesRating.get(i).getMovieTitle() + " " + sortedMoviesRating.get(i).getImdb_score());
+//        }
+        return sortedMoviesRating;
     }
 
     public static void GetTopWatchedMovies(){

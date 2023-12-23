@@ -12,21 +12,21 @@
    <children>
       <AnchorPane prefHeight="524.0" prefWidth="1550.0" styleClass="movie-container" stylesheets="@WatchList.css">
          <children>
-            <ImageView fitHeight="476.0" fitWidth="306.0" layoutX="40.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="384.0" layoutY="68.0" prefHeight="71.0" prefWidth="951.0" style="-fx-font-size: 60px;" styleClass="labels1" stylesheets="@MovieScene.css" text="MovieName + ReleaseDate" />
+            <ImageView fx:id="moviePoster" fitHeight="476.0" fitWidth="306.0" layoutX="40.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="MovieName_ReleaseDate" layoutX="384.0" layoutY="68.0" prefHeight="71.0" prefWidth="951.0" style="-fx-font-size: 60px;" styleClass="labels1" stylesheets="@MovieScene.css" text="MovieName + ReleaseDate" />
             <Label layoutX="384.0" layoutY="182.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Cast:" />
-            <Label layoutX="476.0" layoutY="182.0" prefHeight="39.0" prefWidth="839.0" styleClass="labels1" stylesheets="@MovieScene.css" text="List of Actors" />
+            <Label fx:id="Actors" layoutX="476.0" layoutY="182.0" prefHeight="39.0" prefWidth="839.0" styleClass="labels1" stylesheets="@MovieScene.css" text="List of Actors" />
             <Label layoutX="384.0" layoutY="219.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Director:" />
-            <Label layoutX="528.0" layoutY="219.0" prefHeight="39.0" prefWidth="803.0" styleClass="labels1" stylesheets="@MovieScene.css" text="List of Actors" />
+            <Label fx:id="Directors" layoutX="528.0" layoutY="219.0" prefHeight="39.0" prefWidth="803.0" styleClass="labels1" stylesheets="@MovieScene.css" text="List of Directors" />
             <Label layoutX="384.0" layoutY="256.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Genre:" />
-            <Label layoutX="498.0" layoutY="256.0" prefHeight="39.0" prefWidth="825.0" styleClass="labels1" stylesheets="@MovieScene.css" text="List of Genres" />
+            <Label fx:id="Genres" layoutX="498.0" layoutY="256.0" prefHeight="39.0" prefWidth="825.0" styleClass="labels1" stylesheets="@MovieScene.css" text="List of Genres" />
             <Label layoutX="384.0" layoutY="292.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Language:" />
-            <Label layoutX="550.0" layoutY="292.0" prefHeight="39.0" prefWidth="773.0" styleClass="labels1" stylesheets="@MovieScene.css" text="Language Spoken" />
+            <Label fx:id="Language" layoutX="550.0" layoutY="292.0" prefHeight="39.0" prefWidth="773.0" styleClass="labels1" stylesheets="@MovieScene.css" text="Language Spoken" />
             <Label layoutX="384.0" layoutY="328.0" styleClass="labels2" stylesheets="@MovieScene.css" text="Running Time:" translateZ="-1.0" />
-            <Label layoutX="604.0" layoutY="328.0" prefHeight="39.0" prefWidth="719.0" styleClass="labels1" stylesheets="@MovieScene.css" text="Language Spoken" translateZ="-1.0" />
+            <Label fx:id="RunningTime" layoutX="604.0" layoutY="328.0" prefHeight="39.0" prefWidth="719.0" styleClass="labels1" stylesheets="@MovieScene.css" text="time" translateZ="-1.0" />
             <Label layoutX="384.0" layoutY="371.0" styleClass="labels2" stylesheets="@MovieScene.css" text="IMDB Rating:" />
-            <Label layoutX="587.0" layoutY="372.0" prefHeight="39.0" prefWidth="75.0" styleClass="labels1" stylesheets="@MovieScene.css" text="0/10" />
-            <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="660.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+            <Label fx:id="imdbRating" layoutX="580.0" layoutY="373.0" prefHeight="39.0" prefWidth="138.0" styleClass="labels1" stylesheets="@MovieScene.css" text="0/10" />
+            <ImageView fitHeight="50.0" fitWidth="65.0" layoutX="670.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/6d009e1b243cc054596b94082499e2ce.png" />
                </image>
